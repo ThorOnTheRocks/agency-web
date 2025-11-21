@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Card } from '../components/react/ui/Card';
+import { Badge } from '../components/react/ui/Badge';
+import { ProjectImage } from '../components/react/ui/ProjectImage';
+import { FadeIn } from '../components/react/animations/FadeIn';
+import { sanityClient, urlFor } from '../lib/sanity';
+
+export const prerender = true; // Static for speed
+
+const projects = await sanityClient.fetch(`
+  *[_type == "project"] | order(_createdAt desc) {
+    title,
+    "slug": slug.current,
+    description,
+    link,
+    github,
+    tags,
+    mainImage
+  }
+`);
+---
+
+<Layout 
+  title="Projects - Engineering Portfolio" 
+  description="A selection of technical projects focused on scalability, performance, and user experience."
+>
+  <FadeIn client:visible>
+    <header class="mb-16 pt-8">
+      <h1 class="text-4xl font-bold tracking-tight mb-4">Selected Work</h1>
+      <p class="text-xl text-muted-foreground max-w-2xl">
+        I specialize in building type-safe, full-stack applications. 
+        Here are a few projects that demonstrate my approach to 
+        software architecture and rigorous engineering standards.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {projects.length > 0 ? projects.map((project: any, idx: number) => (
+        <FadeIn client:visible delay={idx * 0.1} className="h-full">
+          <Card className="group p-0 h-full flex flex-col overflow-hidden border-white/10">
+            {/* Image Area */}
+            <div class="aspect-video w-full overflow-hidden bg-neutral-900">
+              <ProjectImage 
+                src={project.mainImage ? urlFor(project.mainImage).width(800).height(450).url() : undefined} 
+                alt={project.title} 
+              />
+            </div>
+
+            {/* Content Area */}
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold text-xl group-hover:text-blue-400 transition-colors">{project.title}</h3>
+                <div class="flex gap-3">
+                  {project.github && (
+                    <a href={project.github} target="_blank" rel="noopener" class="text-xs font-mono opacity-60 hover:opacity-100 hover:text-white transition-opacity">
+                      [SRC]
+                    </a>
+                  )}
+                  {project.link && (
+                    <a href={project.link} target="_blank" rel="noopener" class="text-xs font-mono opacity-60 hover:opacity-100 hover:text-white transition-opacity">
+                      [LIVE]
+                    </a>
+                  )}
+                </div>
+              </div>
+              
+              <p class="text-muted-foreground mb-6 flex-1 leading-relaxed">
+                {project.description}
+              </p>
+
+              <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-white/5">
+                {project.tags?.map((tag: string) => (
+                  <Badge>{tag}</Badge>
+                ))}
+              </div>
+            </div>
+          </Card>
+        </FadeIn>
+      )) : (
+          // Fallback for empty CMS (Placeholders)
+          [1, 2, 3, 4].map((_, idx) => (
+            <FadeIn client:visible delay={idx * 0.1} className="h-full">
+              <Card className="group p-0 h-full flex flex-col overflow-hidden border-white/10">
+                <div class="aspect-video w-full overflow-hidden bg-muted/20 flex items-center justify-center border-b border-white/5">
+                  <p class="text-muted-foreground font-mono text-sm">[Project Preview {idx + 1}]</p>
+                </div>
+                <div class="p-6 flex flex-col flex-1">
+                  <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-xl group-hover:text-primary transition-colors">Placeholder Project {idx + 1}</h3>
+                    <div class="flex gap-3">
+                      <span class="text-xs font-mono opacity-60">[SRC]</span>
+                      <span class="text-xs font-mono opacity-60">[LIVE]</span>
+                    </div>
+                  </div>
+                  <p class="text-muted-foreground mb-6 flex-1 leading-relaxed">
+                    This is a placeholder project description to visualize the layout. It demonstrates how the card handles text content and spacing.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-white/5">
+                    <Badge>React</Badge>
+                    <Badge>TypeScript</Badge>
+                    <Badge>Tailwind</Badge>
+                  </div>
+                </div>
+              </Card>
+            </FadeIn>
+          ))
+      )}
+    </div>
+  </FadeIn>
+</Layout>

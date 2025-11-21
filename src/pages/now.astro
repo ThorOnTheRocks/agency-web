@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { FadeIn } from '../components/react/animations/FadeIn';
+---
+
+<Layout title="Now">
+  <section class="max-w-2xl mx-auto space-y-8">
+    <FadeIn client:visible>
+      <h1 class="text-4xl font-bold mb-8">Now</h1>
+      
+      <div class="prose dark:prose-invert">
+        <p class="text-xl font-medium mb-8">
+          Updated November 2025
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Building</h3>
+            <p class="text-muted-foreground">
+              Currently focused on redesigning my personal portfolio to be more interactive and "alive". 
+              Exploring the limits of Astro 5 and React 19.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Learning</h3>
+            <p class="text-muted-foreground">
+              Diving deep into WebGL and shaders to create more immersive web experiences.
+              Also playing around with Rust for tooling.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-2">Reading</h3>
+            <p class="text-muted-foreground">
+              "Designing Data-Intensive Applications" (again).
+            </p>
+          </div>
+        </div>
+      </div>
+    </FadeIn>
+  </section>
+</Layout>

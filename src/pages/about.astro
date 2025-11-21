@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { FadeIn } from '../components/react/animations/FadeIn';
+import { StaggerChildren, StaggerItem } from '../components/react/animations/StaggerChildren';
+---
+
+<Layout title="About Me">
+  <section class="space-y-12">
+    <FadeIn client:visible>
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8">
+        <div class="space-y-6">
+          <h1 class="text-4xl font-bold mb-6">About Me</h1>
+          <div class="prose dark:prose-invert max-w-none">
+            <p class="text-lg text-muted-foreground">
+              I'm a passionate Fullstack Engineer with a keen eye for design. 
+              I bridge the gap between robust backend architecture and beautiful frontend experiences.
+            </p>
+            <p class="text-muted-foreground">
+              With over 5 years of experience in the industry, I've had the privilege of working with startups and established companies alike. My approach is user-centric, focusing on performance, accessibility, and maintainability.
+            </p>
+          </div>
+          
+          <div class="flex gap-4 pt-4">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-foreground transition-colors">
+              GitHub
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-foreground transition-colors">
+              LinkedIn
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-foreground transition-colors">
+              Twitter
+            </a>
+          </div>
+        </div>
+        
+        <div class="relative aspect-[3/4] bg-muted/30 rounded-xl overflow-hidden border border-border flex items-center justify-center">
+          <p class="text-muted-foreground font-mono text-sm">[Profile Image Placeholder]</p>
+        </div>
+      </div>
+    </FadeIn>
+
+    <div class="mt-12">
+      <h2 class="text-2xl font-semibold mb-6">Tech Stack</h2>
+      <StaggerChildren client:visible className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {[
+          { category: "Frontend", items: ["React", "Next.js", "Astro", "TypeScript", "Tailwind CSS"] },
+          { category: "Backend", items: ["Node.js", "PostgreSQL", "Drizzle ORM", "Serverless"] },
+          { category: "Tools", items: ["Git", "Docker", "Figma", "VS Code"] }
+        ].map((stack) => (
+          <StaggerItem>
+            <div class="p-4 rounded-lg border border-border bg-card h-full">
+              <h3 class="font-medium mb-2 text-foreground">{stack.category}</h3>
+              <ul class="space-y-1">
+                {stack.items.map(item => (
+                  <li class="text-sm text-muted-foreground">{item}</li>
+                ))}
+              </ul>
+            </div>
+          </StaggerItem>
+        ))}
+      </StaggerChildren>
+    </div>
+
+    <FadeIn client:visible delay={0.2}>
+      <h2 class="text-2xl font-semibold mb-4">Journey</h2>
+      <div class="border-l-2 border-border pl-6 space-y-8">
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1 h-4 w-4 rounded-full bg-primary border-4 border-background"></div>
+          <h3 class="font-medium">Senior Engineer @ Tech Corp</h3>
+          <p class="text-sm text-muted-foreground">2022 - Present</p>
+          <p class="mt-2 text-muted-foreground">Leading frontend architecture and design systems.</p>
+        </div>
+        <div class="relative">
+          <div class="absolute -left-[31px] top-1 h-4 w-4 rounded-full bg-muted-foreground/30 border-4 border-background"></div>
+          <h3 class="font-medium">Fullstack Developer @ Startup Inc</h3>
+          <p class="text-sm text-muted-foreground">2019 - 2022</p>
+          <p class="mt-2 text-muted-foreground">Built scalable web apps from zero to one.</p>
+        </div>
+      </div>
+    </FadeIn>
+
+    <FadeIn client:visible delay={0.4}>
+      <h2 class="text-2xl font-semibold mb-4">Interests</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {['Photography', 'Hiking', 'Coffee', 'Mechanical Keyboards'].map((item) => (
+          <div class="p-4 rounded-lg border border-border bg-card text-card-foreground text-center hover:scale-105 transition-transform cursor-default">
+            {item}
+          </div>
+        ))}
+      </div>
+    </FadeIn>
+  </section>
+</Layout>

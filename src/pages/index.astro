@@ -1,16 +1,86 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { Card } from '../components/react/ui/Card';
+import { Badge } from '../components/react/ui/Badge';
+import { FadeIn } from '../components/react/animations/FadeIn';
+import { getFeaturedProjects } from '../lib/sanity';
 
+// 1. Fetch Projects (Type-safe query)
+const projects = await getFeaturedProjects();
+
+export const prerender = true; // Static Generation for Speed
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Home">
+  <section class="py-20 space-y-6">
+    <FadeIn client:visible>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-5xl font-extrabold tracking-tight bg-gradient-to-b from-foreground to-muted-foreground bg-clip-text text-transparent">
+            Fullstack Engineer.<br/>
+            Frontend Specialist.
+          </h1>
+          <p class="text-xl text-muted-foreground max-w-xl mt-6">
+            I build accessible, pixel-perfect web applications with rigorous architectural standards.
+          </p>
+          <div class="mt-8 flex gap-4">
+            <a href="/contact" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+              Get in Touch
+            </a>
+            <a href="/projects" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+              View Work
+            </a>
+          </div>
+        </div>
+        <div class="relative aspect-square bg-muted/30 rounded-2xl overflow-hidden border border-border flex items-center justify-center">
+           <p class="text-muted-foreground font-mono text-sm">[Hero Image / 3D Element Placeholder]</p>
+        </div>
+      </div>
+    </FadeIn>
+  </section>
+
+  <section class="space-y-8 py-12">
+    <FadeIn client:visible delay={0.2}>
+      <h2 class="text-2xl font-semibold mb-8">What I Do</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          { title: "Frontend Architecture", desc: "Scalable, maintainable React/Astro applications with robust state management." },
+          { title: "Design Systems", desc: "Building consistent, accessible component libraries and design tokens." },
+          { title: "Performance", desc: "Optimizing Core Web Vitals, bundle size, and rendering performance." }
+        ].map((service) => (
+          <Card className="p-6">
+            <h3 class="font-bold text-lg mb-2">{service.title}</h3>
+            <p class="text-muted-foreground text-sm">{service.desc}</p>
+          </Card>
+        ))}
+      </div>
+    </FadeIn>
+  </section>
+
+  <section class="space-y-8">
+    <FadeIn client:visible delay={0.4}>
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-semibold">Selected Work</h2>
+        <a href="/projects" class="text-sm text-muted-foreground hover:text-foreground">View all &rarr;</a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        {projects.map((project: any) => (
+          <Card>
+            <div class="space-y-4">
+              <h3 class="font-bold text-lg">{project.title}</h3>
+              <p class="text-sm text-muted-foreground line-clamp-2">
+                {project.description}
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {project.tags?.map((tag: string) => (
+                  <Badge>{tag}</Badge>
+                ))}
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </FadeIn>
+  </section>
+</Layout>

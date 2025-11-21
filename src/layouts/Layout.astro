@@ -1,0 +1,60 @@
+---
+import '../styles/global.css'
+import { ClientRouter } from 'astro:transitions';
+import { ThemeToggle } from '../components/react/ThemeToggle';
+import { SpotifyNowPlaying } from '../components/react/SpotifyNowPlaying';
+import { PageTransition } from '../components/react/animations/PageTransition';
+import ThemeScript from '../components/ThemeScript.astro';
+import '@fontsource/geist-sans';
+import '@fontsource/geist-mono';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Fullstack Engineer & UI Specialist" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <ClientRouter /> <!-- Enables the SPA-like feel -->
+    <ThemeScript />
+  </head>
+  <body class="bg-background text-foreground min-h-screen flex flex-col">
+    
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
+      <div class="max-w-4xl mx-auto flex h-14 items-center justify-between px-4">
+        <a href="/" class="font-bold font-mono">gianluca_galota.portfolio</a>
+        <div class="flex gap-6 text-sm font-medium text-muted-foreground items-center">
+          <a href="/about" class="hover:text-foreground transition-colors">About</a>
+          <a href="/stack" class="hover:text-foreground transition-colors">Stack</a>
+          <a href="/now" class="hover:text-foreground transition-colors">Now</a>
+          <a href="/blog" class="hover:text-foreground transition-colors">Blog</a>
+          <a href="/guestbook" class="hover:text-foreground transition-colors">Guestbook</a>
+          <a href="/contact" class="hover:text-foreground transition-colors">Contact</a>
+          <ThemeToggle client:idle />
+        </div>
+      </div>
+    </nav>
+
+    <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-8">
+      <PageTransition client:load>
+        <slot />
+      </PageTransition>
+    </main>
+
+    <footer class="border-t border-border/40 py-6 text-center text-xs text-muted-foreground flex flex-col items-center gap-4">
+      <SpotifyNowPlaying client:idle />
+      <p>© {new Date().getFullYear()} Built with Astro, React, & Neon.</p>
+    </footer>
+
+  </body>
+</html>
