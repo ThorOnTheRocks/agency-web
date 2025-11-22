@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
-import { getNowPlaying } from '../../lib/spotify';
+import { getNowPlaying } from '../../services/spotify';
+import type { SpotifyApiResponse, SpotifyNowPlayingResponse } from '../../types';
 
 export const GET: APIRoute = async () => {
   const response = await getNowPlaying();
@@ -14,10 +15,10 @@ export const GET: APIRoute = async () => {
     });
   }
 
-  const song = await response.json();
+  const song: SpotifyApiResponse = await response.json();
   console.log('Spotify API Response:', JSON.stringify(song, null, 2));
 
-  if (song.item === null) {
+  if (song.item === null || song.item === undefined) {
     return new Response(JSON.stringify({ isPlaying: false }), {
       status: 200,
       headers: {
@@ -36,26 +37,31 @@ export const GET: APIRoute = async () => {
 
   if (type === 'episode') {
     title = song.item.name;
-    artist = song.item.show.name;
-    albumImageUrl = song.item.images?.[0]?.url || song.item.show.images?.[0]?.url;
+    artist = (song.item as any).show.name; // Episode type not in our simplified types
+    albumImageUrl = (song.item as any).images?.[0]?.url || (song.item as any).show.images?.[0]?.url;
     songUrl = song.item.external_urls.spotify;
   } else if (type === 'track') {
     title = song.item.name;
-    artist = song.item.artists.map((_artist: any) => _artist.name).join(', ');
+    artist = song.item.artists.map((_artist) => _artist.name).join(', ');
     album = song.item.album.name;
     albumImageUrl = song.item.album.images[0].url;
     songUrl = song.item.external_urls.spotify;
   }
 
-  return new Response(
-    JSON.stringify({
+  const nowPlayingResponse: SpotifyNowPlayingResponse = {
+    isPlaying,
+    track: isPlaying ? {
+      name: title,
+      artist,
       album,
       albumImageUrl,
-      artist,
-      isPlaying,
       songUrl,
-      title,
-    }),
+      isPlaying,
+    } : undefined,
+  };
+
+  return new Response(
+    JSON.stringify(nowPlayingResponse),
     {
       status: 200,
       headers: {

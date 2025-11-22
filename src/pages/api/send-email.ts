@@ -1,52 +1,48 @@
 export const prerender = false; // This must be server-side rendered
 
 import type { APIRoute } from 'astro';
-import { Resend } from 'resend';
-
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
+import { resendClient, EMAIL_CONFIG, contactFormTemplate } from '../../services/email';
+import type { ContactFormData, ContactApiResponse } from '../../types';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const data = await request.json();
+    const data: ContactFormData = await request.json();
     const { name, email, subject, message } = data;
 
     if (!name || !email || !message) {
+      const errorResponse: ContactApiResponse = { message: 'Missing required fields' };
       return new Response(
-        JSON.stringify({ message: 'Missing required fields' }),
+        JSON.stringify(errorResponse),
         { status: 400 }
       );
     }
 
-    // Send email to yourself
-    const { error } = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>', // Use your verified domain or Resend's testing domain
-      to: ['gianluca.galota@gmail.com'], // Replace with your actual email or env var
+    // Send email
+    const { error } = await resendClient.emails.send({
+      from: EMAIL_CONFIG.from,
+      to: [EMAIL_CONFIG.to],
       subject: `New Contact Form Submission: ${subject || 'No Subject'}`,
-      html: `
-        <h2>New Message from Portfolio</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-      `,
+      html: contactFormTemplate({ name, email, subject, message }),
       replyTo: email,
     });
 
     if (error) {
+      const errorResponse: ContactApiResponse = { message: error.message, error: error.message };
       return new Response(
-        JSON.stringify({ message: error.message }),
+        JSON.stringify(errorResponse),
         { status: 500 }
       );
     }
 
+    const successResponse: ContactApiResponse = { message: 'Email sent successfully' };
     return new Response(
-      JSON.stringify({ message: 'Email sent successfully' }),
+      JSON.stringify(successResponse),
       { status: 200 }
     );
   } catch (e) {
+    const errorResponse: ContactApiResponse = { message: 'Internal server error' };
     return new Response(
-      JSON.stringify({ message: 'Internal server error' }),
+      JSON.stringify(errorResponse),
       { status: 500 }
     );
   }

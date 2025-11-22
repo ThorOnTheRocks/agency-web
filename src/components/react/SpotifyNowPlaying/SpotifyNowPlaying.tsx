@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion';
-import { useSpotifyNowPlaying } from '../../hooks/useSpotifyNowPlaying';
+import { useSpotifyNowPlaying } from '../../../hooks/useSpotifyNowPlaying';
 
 export const SpotifyNowPlaying = () => {
   const { loading, result } = useSpotifyNowPlaying();
 
   if (loading) {
     return (
-      <div className="flex items-center gap-4 p-4 rounded-xl border border-border/50 bg-card/30 backdrop-blur-sm w-fit animate-pulse">
+      <div 
+        className="flex items-center gap-4 p-4 rounded-xl border border-border/50 bg-card/30 backdrop-blur-sm w-fit animate-pulse"
+        suppressHydrationWarning
+      >
         <div className="w-12 h-12 bg-muted rounded-md" />
         <div className="flex flex-col gap-2">
           <div className="h-3 w-20 bg-muted rounded-full" />

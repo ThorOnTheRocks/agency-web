@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { PortableText } from '../../components/react/PortableText';
-import { sanityClient } from '../../lib/sanity';
+import { sanityClient, urlFor } from '../../services/sanity';
 
 export const prerender = true; // Static Generation (SSG) is best for blogs
 

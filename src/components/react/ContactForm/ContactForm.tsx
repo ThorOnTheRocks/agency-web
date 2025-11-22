@@ -1,4 +1,4 @@
-import { Card } from '../ui/Card';
+import { Card } from '../common/ui';
 import { useContactForm } from './useContactForm';
 
 export const ContactForm = () => {

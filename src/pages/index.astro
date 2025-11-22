@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Card } from '../components/react/ui/Card';
-import { Badge } from '../components/react/ui/Badge';
-import { FadeIn } from '../components/react/animations/FadeIn';
-import { getFeaturedProjects } from '../lib/sanity';
+import { Card, Badge } from '../components/react/common/ui';
+import { FadeIn } from '../components/react/common/animations';
+import { getFeaturedProjects } from '../services/sanity';
+import type { ProjectPreview } from '../types';
 
 // 1. Fetch Projects (Type-safe query)
 const projects = await getFeaturedProjects();
@@ -65,7 +65,7 @@ export const prerender = true; // Static Generation for Speed
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-        {projects.map((project: any) => (
+        {projects.map((project) => (
           <Card>
             <div class="space-y-4">
               <h3 class="font-bold text-lg">{project.title}</h3>

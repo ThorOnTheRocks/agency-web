@@ -1,24 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Card } from '../components/react/ui/Card';
-import { Badge } from '../components/react/ui/Badge';
-import { ProjectImage } from '../components/react/ui/ProjectImage';
-import { FadeIn } from '../components/react/animations/FadeIn';
-import { sanityClient, urlFor } from '../lib/sanity';
+import { Card, Badge, ProjectImage } from '../components/react/common/ui';
+import { FadeIn } from '../components/react/common/animations';
+import { sanityClient, urlFor, getAllProjects } from '../services/sanity';
+import type { Project } from '../types';
 
 export const prerender = true; // Static for speed
 
-const projects = await sanityClient.fetch(`
-  *[_type == "project"] | order(_createdAt desc) {
-    title,
-    "slug": slug.current,
-    description,
-    link,
-    github,
-    tags,
-    mainImage
-  }
-`);
+const projects: Project[] = await getAllProjects();
 ---
 
 <Layout 
@@ -36,7 +25,7 @@ const projects = await sanityClient.fetch(`
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {projects.length > 0 ? projects.map((project: any, idx: number) => (
+      {projects.length > 0 ? projects.map((project, idx: number) => (
         <FadeIn client:visible delay={idx * 0.1} className="h-full">
           <Card className="group p-0 h-full flex flex-col overflow-hidden border-white/10">
             {/* Image Area */}

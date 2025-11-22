@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import GuestbookForm from './GuestbookForm/GuestbookForm';
-import { GuestbookGlobe } from './GuestbookGlobe';
+import { useState, useEffect } from 'react';
+import GuestbookForm from '../GuestbookForm/GuestbookForm';
+import { motion } from 'framer-motion';
+import { GuestbookGlobe } from '../GuestbookGlobe';
 
 interface GuestbookEntry {
   id: number;

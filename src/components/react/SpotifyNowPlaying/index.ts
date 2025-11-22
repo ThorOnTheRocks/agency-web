@@ -1,0 +1,1 @@
+export { SpotifyNowPlaying } from './SpotifyNowPlaying';

@@ -1,10 +1,8 @@
 import type { APIRoute } from 'astro';
-import { db } from '../../db/client';
-import { guestbook } from '../../db/schema';
+import { getAllGuestbookEntries, insertGuestbookEntry } from '../../services/database';
+import type { GuestbookEntry, GuestbookApiResponse, GuestbookLocation } from '../../types';
 
 import { z } from 'zod';
-
-import { desc } from 'drizzle-orm';
 
 const guestbookSchema = z.object({
   name: z.string().min(1),
@@ -17,7 +15,7 @@ const guestbookSchema = z.object({
 
 export const GET: APIRoute = async () => {
   try {
-    const entries = await db.select().from(guestbook).orderBy(desc(guestbook.createdAt)).limit(20);
+    const entries: GuestbookEntry[] = await getAllGuestbookEntries(20);
     return new Response(JSON.stringify(entries), {
       status: 200,
       headers: {
@@ -26,7 +24,8 @@ export const GET: APIRoute = async () => {
     });
   } catch (e) {
     console.error('Guestbook fetch error:', e);
-    return new Response(JSON.stringify({ error: 'Server Error' }), {
+    const errorResponse: GuestbookApiResponse = { message: 'Server Error', error: 'Failed to fetch guestbook entries' };
+    return new Response(JSON.stringify(errorResponse), {
       status: 500,
     });
   }
@@ -38,13 +37,17 @@ export const POST: APIRoute = async ({ request }) => {
     const parsed = guestbookSchema.safeParse(body);
 
     if (!parsed.success) {
+      const errorResponse: GuestbookApiResponse = { 
+        message: 'Missing or invalid fields', 
+        error: parsed.error.message 
+      };
       return new Response(
-        JSON.stringify({ error: 'Missing or invalid fields', details: parsed.error }),
+        JSON.stringify(errorResponse),
         { status: 400 }
       );
     }
 
-    const { name, message, doodle } = parsed.data as any; // TODO: Update zod schema
+    const { name, message, doodle } = parsed.data;
 
     // Infer location from headers (Vercel)
     const city = request.headers.get('x-vercel-ip-city');
@@ -54,23 +57,31 @@ export const POST: APIRoute = async ({ request }) => {
 
     let location = null;
     if (city && country && lat && lng) {
-      location = JSON.stringify({ city, country, lat: parseFloat(lat), lng: parseFloat(lng) });
+      const locationData: GuestbookLocation = { 
+        city, 
+        country, 
+        lat: parseFloat(lat), 
+        lng: parseFloat(lng) 
+      };
+      location = JSON.stringify(locationData);
     }
 
-    await db.insert(guestbook).values({
+    await insertGuestbookEntry({
       name,
-      message,
-      doodle,
+      message: message || null,
+      doodle: doodle || null,
       location,
       email: 'anonymous@example.com',
     });
 
-    return new Response(JSON.stringify({ success: true }), {
+    const successResponse: GuestbookApiResponse = { message: 'Entry added successfully' };
+    return new Response(JSON.stringify(successResponse), {
       status: 200,
     });
   } catch (e) {
     console.error('Guestbook error:', e);
-    return new Response(JSON.stringify({ error: 'Server Error' }), {
+    const errorResponse: GuestbookApiResponse = { message: 'Server Error', error: 'Failed to add guestbook entry' };
+    return new Response(JSON.stringify(errorResponse), {
       status: 500,
     });
   }

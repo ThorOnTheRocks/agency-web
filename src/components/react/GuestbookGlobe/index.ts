@@ -1,0 +1,1 @@
+export { GuestbookGlobe } from './GuestbookGlobe';

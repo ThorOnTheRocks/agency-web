@@ -1,13 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { GuestbookSection } from '../components/react/GuestbookSection';
-import { db } from '../db/client';
-import { guestbook } from '../db/schema';
-import { desc } from 'drizzle-orm';
+import { getAllGuestbookEntries } from '../services/database';
 
 // Server-side logic: Fetch existing entries
 // This runs on the server every time the page is requested (if output: server)
-const entries = await db.select().from(guestbook).orderBy(desc(guestbook.createdAt)).limit(20);
+const entries = await getAllGuestbookEntries(20);
 ---
 
 <Layout title="Guestbook">
