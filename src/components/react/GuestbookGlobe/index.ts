@@ -1,1 +1,0 @@
-export { GuestbookGlobe } from './GuestbookGlobe';

@@ -38,5 +38,6 @@ export async function insertGuestbookEntry(data: {
   doodle?: string | null;
   location?: string | null;
 }) {
-  return await db.insert(guestbook).values(data);
+  const result = await db.insert(guestbook).values(data).returning();
+  return result[0];
 }

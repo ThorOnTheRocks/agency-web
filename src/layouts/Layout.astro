@@ -2,7 +2,7 @@
 import '../styles/global.css'
 import { ClientRouter } from 'astro:transitions';
 import { ThemeToggle } from '../components/react/ThemeToggle';
-import { SpotifyNowPlaying } from '../components/react/SpotifyNowPlaying';
+
 import { PageTransition } from '../components/react/common/animations';
 import ThemeScript from '../components/ThemeScript.astro';
 import '@fontsource/geist-sans';
@@ -52,7 +52,7 @@ const { title, description = "Fullstack Engineer & UI Specialist" } = Astro.prop
     </main>
 
     <footer class="border-t border-border/40 py-6 text-center text-xs text-muted-foreground flex flex-col items-center gap-4">
-      <SpotifyNowPlaying client:idle />
+
       <p>© {new Date().getFullYear()} Built with Astro, React, & Neon.</p>
     </footer>
 

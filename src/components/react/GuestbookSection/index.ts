@@ -1,1 +1,1 @@
-export { GuestbookSection } from './GuestbookSection';
+export * from './GuestbookSection';

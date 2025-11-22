@@ -1,17 +1,16 @@
-import type { GuestbookFormData, GuestbookEntry } from '../models/guestbook';
+import type { GuestbookEntry, GuestbookFormData } from '../models/guestbook';
+import type { ApiResponse } from '../common';
 
-// API request type for creating guestbook entry
-export interface CreateGuestbookEntryRequest extends GuestbookFormData {}
+export type CreateGuestbookEntryRequest = GuestbookFormData & {
+  doodle?: string;
+  location?: {
+    city?: string;
+    country?: string;
+    lat?: number;
+    lng?: number;
+  };
+};
 
-// API response for guestbook operations
-export interface GuestbookApiResponse {
-  message: string;
-  entry?: GuestbookEntry;
-  error?: string;
-}
+export type GuestbookApiResponse = ApiResponse<GuestbookEntry>;
 
-// API response for fetching entries
-export interface GetGuestbookEntriesResponse {
-  entries: GuestbookEntry[];
-  total: number;
-}
+export type GetGuestbookEntriesResponse = ApiResponse<GuestbookEntry[]>;

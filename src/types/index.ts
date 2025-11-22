@@ -17,12 +17,7 @@ export type {
   GuestbookApiResponse,
   GetGuestbookEntriesResponse,
 } from './api/guestbook';
-export type {
-  SpotifyTrack,
-  SpotifyNowPlayingResponse,
-  SpotifyApiTrack,
-  SpotifyApiResponse,
-} from './api/spotify';
+
 
 // Common
 export type {

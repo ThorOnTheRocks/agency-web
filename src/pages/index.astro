@@ -4,63 +4,257 @@ import { Card, Badge } from '../components/react/common/ui';
 import { FadeIn } from '../components/react/common/animations';
 import { getFeaturedProjects } from '../services/sanity';
 import type { ProjectPreview } from '../types';
+import {
+  capabilities,
+  caseStudies,
+  companies,
+  stats,
+  servicePackages,
+  testimonials,
+  processSteps
+} from '../data/homepage';
 
-// 1. Fetch Projects (Type-safe query)
+// Fetch Projects (Type-safe query)
 const projects = await getFeaturedProjects();
 
 export const prerender = true; // Static Generation for Speed
 ---
 
 <Layout title="Home">
+  <!-- HERO SECTION -->
   <section class="py-20 space-y-6">
     <FadeIn client:visible>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            Available for Select Projects
+          </div>
+          
           <h1 class="text-5xl font-extrabold tracking-tight bg-gradient-to-b from-foreground to-muted-foreground bg-clip-text text-transparent">
-            Fullstack Engineer.<br/>
-            Frontend Specialist.
+            Launch Your Product in Weeks, Not Months
           </h1>
-          <p class="text-xl text-muted-foreground max-w-xl mt-6">
-            I build accessible, pixel-perfect web applications with rigorous architectural standards.
+          <p class="text-2xl font-bold mt-4">
+            I help ambitious companies ship production-ready products with confidence.
           </p>
+          <p class="text-lg text-muted-foreground max-w-xl mt-6">
+            I'm a Product Engineer with a focus on speed and quality. From zero to live in 4-12 weeks. No agencies. No overhead. Just senior engineering that delivers.
+          </p>
+          
           <div class="mt-8 flex gap-4">
-            <a href="/contact" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
-              Get in Touch
+            <a href="/contact" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6 py-2">
+              Start a Project
             </a>
-            <a href="/projects" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-              View Work
+            <a href="/projects" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-6 py-2">
+              View Case Studies
             </a>
           </div>
         </div>
+        
         <div class="relative aspect-square bg-muted/30 rounded-2xl overflow-hidden border border-border flex items-center justify-center">
-           <p class="text-muted-foreground font-mono text-sm">[Hero Image / 3D Element Placeholder]</p>
+          <p class="text-muted-foreground font-mono text-sm">[Professional Headshot Placeholder]</p>
         </div>
+      </div>
+      
+      <!-- Floating Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-12">
+        {stats.map((stat) => (
+          <div class="text-center p-4 rounded-lg bg-muted/30 border border-border">
+            <div class="text-3xl font-bold text-primary">{stat.value}</div>
+            <div class="text-xs text-muted-foreground mt-1">{stat.label}</div>
+          </div>
+        ))}
       </div>
     </FadeIn>
   </section>
 
+  <!-- TRUSTED BY SECTION -->
+  <section class="py-12">
+    <FadeIn client:visible delay={0.1}>
+      <p class="text-center text-sm text-muted-foreground mb-6">Trusted by Leading Brands</p>
+      <div class="flex flex-wrap justify-center items-center gap-8">
+        {companies.map((company) => (
+          <div class="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+            <span class="text-2xl">{company.icon}</span>
+            <span class="font-semibold">{company.name}</span>
+          </div>
+        ))}
+      </div>
+    </FadeIn>
+  </section>
+
+  <!-- CAPABILITIES SECTION -->
   <section class="space-y-8 py-12">
     <FadeIn client:visible delay={0.2}>
-      <h2 class="text-2xl font-semibold mb-8">What I Do</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {[
-          { title: "Frontend Architecture", desc: "Scalable, maintainable React/Astro applications with robust state management." },
-          { title: "Design Systems", desc: "Building consistent, accessible component libraries and design tokens." },
-          { title: "Performance", desc: "Optimizing Core Web Vitals, bundle size, and rendering performance." }
-        ].map((service) => (
-          <Card className="p-6">
-            <h3 class="font-bold text-lg mb-2">{service.title}</h3>
-            <p class="text-muted-foreground text-sm">{service.desc}</p>
+      <h2 class="text-3xl font-bold mb-2">Problems I Solve</h2>
+      <p class="text-muted-foreground mb-8">Common challenges companies face—and how I can help</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {capabilities.map((capability) => (
+          <Card className="p-6 hover:shadow-lg transition-all hover:-translate-y-1">
+            <div class="text-4xl mb-4">{capability.icon}</div>
+            <h3 class="font-bold text-lg mb-2">{capability.title}</h3>
+            <p class="text-muted-foreground text-sm mb-4">{capability.description}</p>
+            <div class="space-y-2">
+              <div class="text-xs font-semibold text-muted-foreground">What you get:</div>
+              <div class="text-sm">{capability.deliverables}</div>
+              <div class="text-xs text-primary font-semibold mt-3">Timeline: {capability.timeline}</div>
+            </div>
           </Card>
         ))}
       </div>
     </FadeIn>
   </section>
 
-  <section class="space-y-8">
+  <!-- CASE STUDIES SECTION -->
+  <section class="space-y-8 py-12">
+    <FadeIn client:visible delay={0.3}>
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 class="text-3xl font-bold mb-2">How I've Helped Companies Like Yours</h2>
+          <p class="text-muted-foreground">Real projects, measurable outcomes</p>
+        </div>
+        <a href="/projects" class="text-sm text-muted-foreground hover:text-foreground">View all &rarr;</a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {caseStudies.map((study) => (
+          <Card className="p-6 hover:shadow-lg transition-all">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl">{study.logo}</span>
+              <div>
+                <div class="font-semibold text-sm text-muted-foreground">{study.company}</div>
+                <h3 class="font-bold text-lg">{study.title}</h3>
+              </div>
+            </div>
+            
+            <div class="space-y-3 text-sm">
+              <div>
+                <div class="text-xs font-semibold text-muted-foreground mb-1">Challenge</div>
+                <div>{study.problem}</div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-muted-foreground mb-1">Solution</div>
+                <div>{study.solution}</div>
+              </div>
+              <div class="bg-primary/10 p-3 rounded-md">
+                <div class="text-xs font-semibold text-primary mb-1">Result</div>
+                <div class="font-semibold">{study.result}</div>
+              </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-2 mt-4">
+              {study.tech.map((tech) => (
+                <Badge className="text-xs">{tech}</Badge>
+              ))}
+            </div>
+          </Card>
+        ))}
+      </div>
+    </FadeIn>
+  </section>
+
+  <!-- SIMPLIFIED TECH STACK -->
+  <section class="py-8">
     <FadeIn client:visible delay={0.4}>
+      <div class="text-center">
+        <p class="text-sm text-muted-foreground">
+          <strong>Modern stack:</strong> React, Next.js, Node.js, TypeScript, PostgreSQL. I choose tools based on your needs, not trends.
+        </p>
+      </div>
+    </FadeIn>
+  </section>
+
+  <!-- SERVICE PACKAGES SECTION -->
+  <section class="py-12">
+    <FadeIn client:visible delay={0.5}>
+      <h2 class="text-3xl font-bold mb-2">How We Can Work Together</h2>
+      <p class="text-muted-foreground mb-8">Three flexible engagement models designed for your needs</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {servicePackages.map((pkg) => (
+          <Card className="p-6 hover:shadow-lg transition-all hover:border-primary">
+            <h3 class="font-bold text-xl mb-1">{pkg.title}</h3>
+            <p class="text-sm text-primary font-semibold mb-2">{pkg.subtitle}</p>
+            <p class="text-xs text-muted-foreground mb-4">Perfect for: {pkg.perfectFor}</p>
+            <ul class="space-y-3 mb-6">
+              {pkg.features.map((feature) => (
+                <li class="flex items-start gap-2 text-sm">
+                  <span class="text-primary mt-1">✓</span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="text-xs text-muted-foreground mb-4">Timeline: {pkg.timeline}</div>
+            <a href="/contact" class="inline-flex items-center text-sm font-medium text-primary hover:underline">
+              Get Started →
+            </a>
+          </Card>
+        ))}
+      </div>
+      
+      <p class="text-center text-sm text-muted-foreground mt-8">
+        All packages include production-ready code with measurable business impact. <a href="/contact" class="text-primary hover:underline">Contact me</a> for pricing and availability.
+      </p>
+    </FadeIn>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="py-12">
+    <FadeIn client:visible delay={0.6}>
+      <h2 class="text-3xl font-bold mb-8 text-center">What Clients Say</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {testimonials.map((testimonial) => (
+          <Card className="p-6">
+            <div class="text-sm text-muted-foreground mb-4 leading-relaxed">
+              "{testimonial.quote}"
+            </div>
+            <div class="border-t border-border pt-4">
+              <div class="font-semibold text-sm">{testimonial.author}</div>
+              <div class="text-xs text-muted-foreground">{testimonial.company}</div>
+              <Badge variant="secondary" className="text-xs mt-2">{testimonial.context}</Badge>
+            </div>
+          </Card>
+        ))}
+      </div>
+      
+      <p class="text-center text-xs text-muted-foreground mt-6">
+        * Testimonials represent realistic examples and will be replaced with actual client feedback
+      </p>
+    </FadeIn>
+  </section>
+
+  <!-- PROCESS SECTION -->
+  <section class="py-12">
+    <FadeIn client:visible delay={0.7}>
+      <h2 class="text-3xl font-bold mb-2">How We'll Work Together</h2>
+      <p class="text-muted-foreground mb-8">Simple, transparent, and focused on shipping</p>
+      
+      <div class="space-y-4">
+        {processSteps.map((step) => (
+          <Card className="p-6 hover:shadow-md transition-all">
+            <div class="flex items-start gap-6">
+              <div class="text-4xl font-bold text-primary/20">{step.number}</div>
+              <div class="flex-1">
+                <h3 class="font-bold text-lg mb-2">{step.title}</h3>
+                <p class="text-sm text-muted-foreground">{step.description}</p>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </FadeIn>
+  </section>
+
+  <!-- SELECTED WORK FROM SANITY -->
+  <section class="space-y-8 py-12">
+    <FadeIn client:visible delay={0.8}>
       <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-semibold">Selected Work</h2>
+        <h2 class="text-3xl font-bold">More Projects</h2>
         <a href="/projects" class="text-sm text-muted-foreground hover:text-foreground">View all &rarr;</a>
       </div>
 
@@ -81,6 +275,51 @@ export const prerender = true; // Static Generation for Speed
           </Card>
         ))}
       </div>
+    </FadeIn>
+  </section>
+
+  <!-- FINAL CTA SECTION -->
+  <section class="py-20">
+    <FadeIn client:visible delay={0.9}>
+      <Card className="p-12 text-center bg-gradient-to-b from-muted/50 to-muted/20">
+        <h2 class="text-4xl font-bold mb-4">Ready to Ship Your Product?</h2>
+        <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+          Let's get your product live. Book a call and I'll send you a detailed proposal within 48 hours.
+        </p>
+        <p class="text-sm text-muted-foreground mb-8 max-w-xl mx-auto">
+          No agencies. No account managers. No overhead.<br/>Just senior engineering that ships.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a href="/contact" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8">
+            Start a Project
+          </a>
+          <a href="mailto:gianluca.galota@gmail.com" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-8">
+            Email Me
+          </a>
+          <a href="https://github.com/ThorOnTheRocks" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-8">
+            View GitHub
+          </a>
+        </div>
+        
+        <div class="mt-12 pt-8 border-t border-border">
+          <div class="text-sm font-semibold mb-4">Remote, Worldwide from Spain 🇪🇸</div>
+          <div class="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
+            <div class="flex items-center gap-2">
+              <span>🇮🇹</span> <span>Italian (Native)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span>🇬🇧</span> <span>English (Professional)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span>🇪🇸</span> <span>Spanish (Professional)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span>🇵🇹</span> <span>Portuguese (Professional)</span>
+            </div>
+          </div>
+        </div>
+      </Card>
     </FadeIn>
   </section>
 </Layout>
