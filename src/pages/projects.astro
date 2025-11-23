@@ -2,8 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { Card, Badge, ProjectImage } from '../components/react/common/ui';
 import { FadeIn } from '../components/react/common/animations';
-import { sanityClient, urlFor, getAllProjects } from '../services/sanity';
-import type { Project } from '../types';
+import { getAllProjects } from '../services/content';
+import type { Project } from '../services/content';
 
 export const prerender = true; // Static for speed
 
@@ -31,23 +31,23 @@ const projects: Project[] = await getAllProjects();
             {/* Image Area */}
             <div class="aspect-video w-full overflow-hidden bg-neutral-900">
               <ProjectImage 
-                src={project.mainImage ? urlFor(project.mainImage).width(800).height(450).url() : undefined} 
-                alt={project.title} 
+                src={project.data.heroImage} 
+                alt={project.data.title} 
               />
             </div>
 
             {/* Content Area */}
             <div class="p-6 flex flex-col flex-1">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="font-bold text-xl group-hover:text-blue-400 transition-colors">{project.title}</h3>
+                <h3 class="font-bold text-xl group-hover:text-blue-400 transition-colors">{project.data.title}</h3>
                 <div class="flex gap-3">
-                  {project.github && (
-                    <a href={project.github} target="_blank" rel="noopener" class="text-xs font-mono opacity-60 hover:opacity-100 hover:text-white transition-opacity">
+                  {project.data.github && (
+                    <a href={project.data.github} target="_blank" rel="noopener" class="text-xs font-mono opacity-60 hover:opacity-100 hover:text-white transition-opacity">
                       [SRC]
                     </a>
                   )}
-                  {project.link && (
-                    <a href={project.link} target="_blank" rel="noopener" class="text-xs font-mono opacity-60 hover:opacity-100 hover:text-white transition-opacity">
+                  {project.data.link && (
+                    <a href={project.data.link} target="_blank" rel="noopener" class="text-xs font-mono opacity-60 hover:opacity-100 hover:text-white transition-opacity">
                       [LIVE]
                     </a>
                   )}
@@ -55,11 +55,11 @@ const projects: Project[] = await getAllProjects();
               </div>
               
               <p class="text-muted-foreground mb-6 flex-1 leading-relaxed">
-                {project.description}
+                {project.data.description}
               </p>
 
               <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-white/5">
-                {project.tags?.map((tag: string) => (
+                {project.data.tags?.map((tag: string) => (
                   <Badge>{tag}</Badge>
                 ))}
               </div>

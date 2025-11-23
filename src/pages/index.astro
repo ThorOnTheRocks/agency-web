@@ -2,8 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { Card, Badge } from '../components/react/common/ui';
 import { FadeIn } from '../components/react/common/animations';
-import { getFeaturedProjects } from '../services/sanity';
-import type { ProjectPreview } from '../types';
+import { getFeaturedProjects } from '../services/content';
+import type { Project } from '../services/content';
 import {
   capabilities,
   caseStudies,
@@ -262,12 +262,12 @@ export const prerender = true; // Static Generation for Speed
         {projects.map((project) => (
           <Card>
             <div class="space-y-4">
-              <h3 class="font-bold text-lg">{project.title}</h3>
+              <h3 class="font-bold text-lg">{project.data.title}</h3>
               <p class="text-sm text-muted-foreground line-clamp-2">
-                {project.description}
+                {project.data.description}
               </p>
               <div class="flex flex-wrap gap-2">
-                {project.tags?.map((tag: string) => (
+                {project.data.tags?.map((tag: string) => (
                   <Badge>{tag}</Badge>
                 ))}
               </div>

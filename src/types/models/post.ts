@@ -1,22 +1,10 @@
-// Blog post model type based on Sanity schema
-export interface Post {
-  title: string;
-  slug: {
-    current: string;
-  };
-  publishedAt?: string;
-  content?: any[]; // Portable Text content
-  excerpt?: string;
-  _createdAt?: string;
-  _updatedAt?: string;
-}
+import type { CollectionEntry } from 'astro:content';
 
-// Simplified post type for blog listing
+export type Post = CollectionEntry<'blog'>;
+
 export interface PostPreview {
   title: string;
-  slug: {
-    current: string;
-  };
-  publishedAt?: string;
+  slug: string;
+  publishedAt: Date;
   excerpt?: string;
 }

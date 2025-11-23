@@ -1,21 +1,6 @@
-// Project model type based on Sanity schema
-export interface Project {
-  title: string;
-  slug: string;
-  description: string;
-  link?: string;
-  github?: string;
-  tags?: string[];
-  mainImage?: {
-    asset: {
-      _ref: string;
-      _type: string;
-    };
-    alt?: string;
-  };
-  _createdAt?: string;
-  _updatedAt?: string;
-}
+import type { CollectionEntry } from 'astro:content';
+
+export type Project = CollectionEntry<'projects'>;
 
 // Simplified project type for lists/cards
 export interface ProjectPreview {
