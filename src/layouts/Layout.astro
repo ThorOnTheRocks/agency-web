@@ -24,12 +24,11 @@ const { title, description = "Fullstack Engineer & UI Specialist" } = Astro.prop
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
-    <ClientRouter /> <!-- Enables the SPA-like feel -->
+    <ClientRouter />
     <ThemeScript />
   </head>
   <body class="bg-background text-foreground min-h-screen flex flex-col">
     
-    <!-- Navigation -->
     <nav class="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
       <div class="max-w-4xl mx-auto flex h-14 items-center justify-between px-4">
         <a href="/" class="font-bold font-mono">gianluca_galota.portfolio</a>

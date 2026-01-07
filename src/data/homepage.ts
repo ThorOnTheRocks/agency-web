@@ -1,8 +1,3 @@
-/**
- * Homepage data structures
- * Separating content from presentation for better maintainability
- */
-
 export const capabilities = [
   {
     icon: '⚡',

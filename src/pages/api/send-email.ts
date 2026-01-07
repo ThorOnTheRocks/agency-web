@@ -1,4 +1,4 @@
-export const prerender = false; // This must be server-side rendered
+export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { resendClient, EMAIL_CONFIG, contactFormTemplate } from '../../services/email';
@@ -17,7 +17,6 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Send email
     const { error } = await resendClient.emails.send({
       from: EMAIL_CONFIG.from,
       to: [EMAIL_CONFIG.to],

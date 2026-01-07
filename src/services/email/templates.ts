@@ -1,6 +1,3 @@
-/**
- * Generate HTML template for contact form email
- */
 export function contactFormTemplate(data: {
   name: string;
   email: string;
