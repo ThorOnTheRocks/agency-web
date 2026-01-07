@@ -4,19 +4,8 @@
 // Models
 export type { Project, ProjectPreview } from './models/project';
 export type { Post, PostPreview } from './models/post';
-export type {
-  GuestbookEntry,
-  GuestbookLocation,
-  GuestbookFormData,
-} from './models/guestbook';
-
 // API Types
 export type { ContactFormData, ContactApiResponse } from './api/contact';
-export type {
-  CreateGuestbookEntryRequest,
-  GuestbookApiResponse,
-  GetGuestbookEntriesResponse,
-} from './api/guestbook';
 
 
 // Common

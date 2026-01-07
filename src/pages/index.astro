@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { Card, Badge } from '../components/react/common/ui';
 import { FadeIn } from '../components/react/common/animations';
+import { NewsletterSection } from '../components/react/Newsletter';
 import { getFeaturedProjects } from '../services/content';
 import type { Project } from '../services/content';
 import {
@@ -14,14 +15,12 @@ import {
   processSteps
 } from '../data/homepage';
 
-// Fetch Projects (Type-safe query)
 const projects = await getFeaturedProjects();
 
-export const prerender = true; // Static Generation for Speed
+export const prerender = true;
 ---
 
 <Layout title="Home">
-  <!-- HERO SECTION -->
   <section class="py-20 space-y-6">
     <FadeIn client:visible>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -59,7 +58,6 @@ export const prerender = true; // Static Generation for Speed
         </div>
       </div>
       
-      <!-- Floating Stats -->
       <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-12">
         {stats.map((stat) => (
           <div class="text-center p-4 rounded-lg bg-muted/30 border border-border">
@@ -71,7 +69,6 @@ export const prerender = true; // Static Generation for Speed
     </FadeIn>
   </section>
 
-  <!-- TRUSTED BY SECTION -->
   <section class="py-12">
     <FadeIn client:visible delay={0.1}>
       <p class="text-center text-sm text-muted-foreground mb-6">Trusted by Leading Brands</p>
@@ -86,7 +83,6 @@ export const prerender = true; // Static Generation for Speed
     </FadeIn>
   </section>
 
-  <!-- CAPABILITIES SECTION -->
   <section class="space-y-8 py-12">
     <FadeIn client:visible delay={0.2}>
       <h2 class="text-3xl font-bold mb-2">Problems I Solve</h2>
@@ -109,7 +105,6 @@ export const prerender = true; // Static Generation for Speed
     </FadeIn>
   </section>
 
-  <!-- CASE STUDIES SECTION -->
   <section class="space-y-8 py-12">
     <FadeIn client:visible delay={0.3}>
       <div class="flex items-center justify-between mb-8">
@@ -157,7 +152,6 @@ export const prerender = true; // Static Generation for Speed
     </FadeIn>
   </section>
 
-  <!-- SIMPLIFIED TECH STACK -->
   <section class="py-8">
     <FadeIn client:visible delay={0.4}>
       <div class="text-center">
@@ -168,7 +162,6 @@ export const prerender = true; // Static Generation for Speed
     </FadeIn>
   </section>
 
-  <!-- SERVICE PACKAGES SECTION -->
   <section class="py-12">
     <FadeIn client:visible delay={0.5}>
       <h2 class="text-3xl font-bold mb-2">How We Can Work Together</h2>
@@ -202,7 +195,6 @@ export const prerender = true; // Static Generation for Speed
     </FadeIn>
   </section>
 
-  <!-- TESTIMONIALS SECTION -->
   <section class="py-12">
     <FadeIn client:visible delay={0.6}>
       <h2 class="text-3xl font-bold mb-8 text-center">What Clients Say</h2>
@@ -228,7 +220,6 @@ export const prerender = true; // Static Generation for Speed
     </FadeIn>
   </section>
 
-  <!-- PROCESS SECTION -->
   <section class="py-12">
     <FadeIn client:visible delay={0.7}>
       <h2 class="text-3xl font-bold mb-2">How We'll Work Together</h2>
@@ -250,7 +241,6 @@ export const prerender = true; // Static Generation for Speed
     </FadeIn>
   </section>
 
-  <!-- SELECTED WORK FROM SANITY -->
   <section class="space-y-8 py-12">
     <FadeIn client:visible delay={0.8}>
       <div class="flex items-center justify-between">
@@ -278,7 +268,8 @@ export const prerender = true; // Static Generation for Speed
     </FadeIn>
   </section>
 
-  <!-- FINAL CTA SECTION -->
+  <NewsletterSection client:visible />
+
   <section class="py-20">
     <FadeIn client:visible delay={0.9}>
       <Card className="p-12 text-center bg-gradient-to-b from-muted/50 to-muted/20">

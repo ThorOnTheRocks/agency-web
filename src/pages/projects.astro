@@ -5,7 +5,7 @@ import { FadeIn } from '../components/react/common/animations';
 import { getAllProjects } from '../services/content';
 import type { Project } from '../services/content';
 
-export const prerender = true; // Static for speed
+export const prerender = true;
 
 const projects: Project[] = await getAllProjects();
 ---
@@ -28,15 +28,12 @@ const projects: Project[] = await getAllProjects();
       {projects.length > 0 ? projects.map((project, idx: number) => (
         <FadeIn client:visible delay={idx * 0.1} className="h-full">
           <Card className="group p-0 h-full flex flex-col overflow-hidden border-white/10">
-            {/* Image Area */}
             <div class="aspect-video w-full overflow-hidden bg-neutral-900">
               <ProjectImage 
                 src={project.data.heroImage} 
                 alt={project.data.title} 
               />
             </div>
-
-            {/* Content Area */}
             <div class="p-6 flex flex-col flex-1">
               <div class="flex items-center justify-between mb-4">
                 <h3 class="font-bold text-xl group-hover:text-blue-400 transition-colors">{project.data.title}</h3>
@@ -67,7 +64,6 @@ const projects: Project[] = await getAllProjects();
           </Card>
         </FadeIn>
       )) : (
-          // Fallback for empty CMS (Placeholders)
           [1, 2, 3, 4].map((_, idx) => (
             <FadeIn client:visible delay={idx * 0.1} className="h-full">
               <Card className="group p-0 h-full flex flex-col overflow-hidden border-white/10">
