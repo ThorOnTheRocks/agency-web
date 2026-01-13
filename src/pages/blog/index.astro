@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getPosts } from '../../services/content';
+import { NewsletterSection } from '../../components/react/Newsletter';
 import type { Post } from '../../services/content';
 
 export const prerender = true;
@@ -49,5 +50,10 @@ const posts: Post[] = await getPosts();
             <p class="text-muted-foreground font-mono">Query returned 0 records.</p>
         </div>
     )}
+  </div>
+  </div>
+
+  <div class="mt-20 -mb-8">
+    <NewsletterSection client:visible />
   </div>
 </Layout>

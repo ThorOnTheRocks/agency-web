@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { Card, Badge } from '../components/react/common/ui';
 import { FadeIn } from '../components/react/common/animations';
-import { NewsletterSection } from '../components/react/Newsletter';
+// newsletter import removed
 import { getFeaturedProjects } from '../services/content';
 import type { Project } from '../services/content';
 import {
@@ -152,15 +152,7 @@ export const prerender = true;
     </FadeIn>
   </section>
 
-  <section class="py-8">
-    <FadeIn client:visible delay={0.4}>
-      <div class="text-center">
-        <p class="text-sm text-muted-foreground">
-          <strong>Modern stack:</strong> React, Next.js, Node.js, TypeScript, PostgreSQL. I choose tools based on your needs, not trends.
-        </p>
-      </div>
-    </FadeIn>
-  </section>
+  {/* Stack section removed as per noise reduction plan */}
 
   <section class="py-12">
     <FadeIn client:visible delay={0.5}>
@@ -268,7 +260,7 @@ export const prerender = true;
     </FadeIn>
   </section>
 
-  <NewsletterSection client:visible />
+  {/* Newsletter section removed (moved to dedicated page) */}
 
   <section class="py-20">
     <FadeIn client:visible delay={0.9}>
@@ -294,20 +286,8 @@ export const prerender = true;
         </div>
         
         <div class="mt-12 pt-8 border-t border-border">
-          <div class="text-sm font-semibold mb-4">Remote, Worldwide from Spain 🇪🇸</div>
-          <div class="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-            <div class="flex items-center gap-2">
-              <span>🇮🇹</span> <span>Italian (Native)</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span>🇬🇧</span> <span>English (Professional)</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span>🇪🇸</span> <span>Spanish (Professional)</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span>🇵🇹</span> <span>Portuguese (Professional)</span>
-            </div>
+          <div class="text-sm font-semibold text-muted-foreground">
+            Remote, Worldwide from Spain 🇪🇸 • English / Spanish / Italian / Portuguese
           </div>
         </div>
       </Card>
