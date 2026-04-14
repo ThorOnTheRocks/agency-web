@@ -2,14 +2,33 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { resendClient, EMAIL_CONFIG, contactFormTemplate } from '../../services/email';
-import type { ContactFormData, ContactApiResponse } from '../../types';
+import type { ContactFormData, ContactApiResponse } from '../../types/api/contact';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const data: ContactFormData = await request.json();
-    const { name, email, subject, message } = data;
+    const {
+      name,
+      email,
+      companyOrTeam,
+      projectType,
+      projectStage,
+      budgetRange,
+      timeline,
+      websiteOrProductUrl,
+      message,
+    } = data;
 
-    if (!name || !email || !message) {
+    if (
+      !name ||
+      !email ||
+      !companyOrTeam ||
+      !projectType ||
+      !projectStage ||
+      !budgetRange ||
+      !timeline ||
+      !message
+    ) {
       const errorResponse: ContactApiResponse = { message: 'Missing required fields' };
       return new Response(
         JSON.stringify(errorResponse),
@@ -20,8 +39,18 @@ export const POST: APIRoute = async ({ request }) => {
     const { error } = await resendClient.emails.send({
       from: EMAIL_CONFIG.from,
       to: [EMAIL_CONFIG.to],
-      subject: `New Contact Form Submission: ${subject || 'No Subject'}`,
-      html: contactFormTemplate({ name, email, subject, message }),
+      subject: `New Project Inquiry: ${projectType} / ${budgetRange}`,
+      html: contactFormTemplate({
+        name,
+        email,
+        companyOrTeam,
+        projectType,
+        projectStage,
+        budgetRange,
+        timeline,
+        websiteOrProductUrl,
+        message,
+      }),
       replyTo: email,
     });
 

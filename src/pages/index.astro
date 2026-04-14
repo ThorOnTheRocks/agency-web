@@ -1,296 +1,295 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Card, Badge } from '../components/react/common/ui';
-import { FadeIn } from '../components/react/common/animations';
-// newsletter import removed
-import { getFeaturedProjects } from '../services/content';
-import type { Project } from '../services/content';
 import {
-  capabilities,
+  authorityPillars,
   caseStudies,
   companies,
-  stats,
-  servicePackages,
-  testimonials,
-  processSteps
+  engagementModes,
+  fitStatements,
+  processSteps,
+  proofPoints,
 } from '../data/homepage';
+import { siteConfig } from '../config/site';
+import { FadeIn } from '../components/react/common/animations';
+import { ProjectImage } from '../components/react/common/ui';
 
-const projects = await getFeaturedProjects();
+const companyNames = companies.map(({ name }) => name).join(' · ');
 
 export const prerender = true;
 ---
 
-<Layout title="Home">
-  <section class="py-20 space-y-6">
-    <FadeIn client:visible>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-            </span>
-            Available for Select Projects
-          </div>
-          
-          <h1 class="text-5xl font-extrabold tracking-tight bg-gradient-to-b from-foreground to-muted-foreground bg-clip-text text-transparent">
-            Launch Your Product in Weeks, Not Months
-          </h1>
-          <p class="text-2xl font-bold mt-4">
-            I help ambitious companies ship production-ready products with confidence.
-          </p>
-          <p class="text-lg text-muted-foreground max-w-xl mt-6">
-            I'm a Product Engineer with a focus on speed and quality. From zero to live in 4-12 weeks. No agencies. No overhead. Just senior engineering that delivers.
-          </p>
-          
-          <div class="mt-8 flex gap-4">
-            <a href="/contact" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6 py-2">
-              Start a Project
-            </a>
-            <a href="/projects" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-6 py-2">
-              View Case Studies
-            </a>
-          </div>
-        </div>
-        
-        <div class="relative aspect-square bg-muted/30 rounded-2xl overflow-hidden border border-border flex items-center justify-center">
-          <p class="text-muted-foreground font-mono text-sm">[Professional Headshot Placeholder]</p>
-        </div>
-      </div>
-      
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-12">
-        {stats.map((stat) => (
-          <div class="text-center p-4 rounded-lg bg-muted/30 border border-border">
-            <div class="text-3xl font-bold text-primary">{stat.value}</div>
-            <div class="text-xs text-muted-foreground mt-1">{stat.label}</div>
-          </div>
-        ))}
-      </div>
-    </FadeIn>
-  </section>
+<Layout
+  title={siteConfig.name}
+  description="Premium product engineering for founders and product teams that need launch, redesign, or rescue work handled with senior judgment."
+  fullBleed
+>
+  <section class="relative isolate overflow-hidden border-b border-border/70">
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:48px_48px] opacity-[0.16]"></div>
+      <div class="absolute inset-x-0 top-0 h-[38rem] bg-gradient-to-b from-accent/70 via-transparent to-transparent"></div>
+      <div class="absolute right-[-8rem] top-20 h-[26rem] w-[26rem] rounded-full bg-primary/10 blur-3xl"></div>
+      <div class="absolute left-[-10rem] bottom-[-10rem] h-[20rem] w-[20rem] rounded-full bg-foreground/6 blur-3xl"></div>
+    </div>
 
-  <section class="py-12">
-    <FadeIn client:visible delay={0.1}>
-      <p class="text-center text-sm text-muted-foreground mb-6">Trusted by Leading Brands</p>
-      <div class="flex flex-wrap justify-center items-center gap-8">
-        {companies.map((company) => (
-          <div class="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-            <span class="text-2xl">{company.icon}</span>
-            <span class="font-semibold">{company.name}</span>
-          </div>
-        ))}
-      </div>
-    </FadeIn>
-  </section>
+    <div class="site-container relative flex min-h-[calc(100svh-4rem)] flex-col justify-end pb-12 pt-12 md:pb-16 md:pt-16">
+      <div class="grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_360px] lg:items-end">
+        <FadeIn client:load>
+          <div class="max-w-4xl">
+            <p class="eyebrow">Premium product engineering for startup founders and product teams</p>
+            <p class="mt-5 font-display text-[2rem] tracking-[-0.05em] text-foreground md:text-[2.7rem]">
+              Gianluca Galota
+            </p>
+            <h1 class="mt-6 max-w-4xl font-display text-[clamp(3.7rem,9.2vw,7.8rem)] leading-[0.88] tracking-[-0.07em] text-foreground">
+              Launch, redesign, or rescue the product before trust slips.
+            </h1>
+            <p class="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-foreground/84 md:text-[1.45rem]">
+              I help ambitious teams ship products that feel credible faster, convert with more confidence,
+              and move from decision to delivery without agency overhead.
+            </p>
 
-  <section class="space-y-8 py-12">
-    <FadeIn client:visible delay={0.2}>
-      <h2 class="text-3xl font-bold mb-2">Problems I Solve</h2>
-      <p class="text-muted-foreground mb-8">Common challenges companies face—and how I can help</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {capabilities.map((capability) => (
-          <Card className="p-6 hover:shadow-lg transition-all hover:-translate-y-1">
-            <div class="text-4xl mb-4">{capability.icon}</div>
-            <h3 class="font-bold text-lg mb-2">{capability.title}</h3>
-            <p class="text-muted-foreground text-sm mb-4">{capability.description}</p>
-            <div class="space-y-2">
-              <div class="text-xs font-semibold text-muted-foreground">What you get:</div>
-              <div class="text-sm">{capability.deliverables}</div>
-              <div class="text-xs text-primary font-semibold mt-3">Timeline: {capability.timeline}</div>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a
+                href="/contact"
+                class="inline-flex min-h-11 items-center justify-center rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+              >
+                Start a project conversation
+              </a>
+              <a
+                href="/#proof"
+                class="inline-flex min-h-11 items-center justify-center rounded-full border border-border/80 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+              >
+                Review selected proof
+              </a>
             </div>
-          </Card>
-        ))}
-      </div>
-    </FadeIn>
-  </section>
 
-  <section class="space-y-8 py-12">
-    <FadeIn client:visible delay={0.3}>
-      <div class="flex items-center justify-between mb-8">
-        <div>
-          <h2 class="text-3xl font-bold mb-2">How I've Helped Companies Like Yours</h2>
-          <p class="text-muted-foreground">Real projects, measurable outcomes</p>
-        </div>
-        <a href="/projects" class="text-sm text-muted-foreground hover:text-foreground">View all &rarr;</a>
-      </div>
+            <p class="mt-8 max-w-3xl border-t border-border/70 pt-4 text-sm leading-relaxed text-muted-foreground">
+              Trusted by <span class="text-foreground">{companyNames}</span>
+            </p>
+          </div>
+        </FadeIn>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {caseStudies.map((study) => (
-          <Card className="p-6 hover:shadow-lg transition-all">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-3xl">{study.logo}</span>
-              <div>
-                <div class="font-semibold text-sm text-muted-foreground">{study.company}</div>
-                <h3 class="font-bold text-lg">{study.title}</h3>
-              </div>
-            </div>
-            
-            <div class="space-y-3 text-sm">
-              <div>
-                <div class="text-xs font-semibold text-muted-foreground mb-1">Challenge</div>
-                <div>{study.problem}</div>
-              </div>
-              <div>
-                <div class="text-xs font-semibold text-muted-foreground mb-1">Solution</div>
-                <div>{study.solution}</div>
-              </div>
-              <div class="bg-primary/10 p-3 rounded-md">
-                <div class="text-xs font-semibold text-primary mb-1">Result</div>
-                <div class="font-semibold">{study.result}</div>
-              </div>
-            </div>
-            
-            <div class="flex flex-wrap gap-2 mt-4">
-              {study.tech.map((tech) => (
-                <Badge className="text-xs">{tech}</Badge>
-              ))}
-            </div>
-          </Card>
-        ))}
-      </div>
-    </FadeIn>
-  </section>
-
-  {/* Stack section removed as per noise reduction plan */}
-
-  <section class="py-12">
-    <FadeIn client:visible delay={0.5}>
-      <h2 class="text-3xl font-bold mb-2">How We Can Work Together</h2>
-      <p class="text-muted-foreground mb-8">Three flexible engagement models designed for your needs</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {servicePackages.map((pkg) => (
-          <Card className="p-6 hover:shadow-lg transition-all hover:border-primary">
-            <h3 class="font-bold text-xl mb-1">{pkg.title}</h3>
-            <p class="text-sm text-primary font-semibold mb-2">{pkg.subtitle}</p>
-            <p class="text-xs text-muted-foreground mb-4">Perfect for: {pkg.perfectFor}</p>
-            <ul class="space-y-3 mb-6">
-              {pkg.features.map((feature) => (
-                <li class="flex items-start gap-2 text-sm">
-                  <span class="text-primary mt-1">✓</span>
-                  <span>{feature}</span>
-                </li>
+        <FadeIn client:load delay={0.12}>
+          <div class="relative overflow-hidden rounded-[2rem] border border-border/70 bg-surface/88 p-7 shadow-[0_26px_80px_-52px_rgba(46,28,17,0.35)]">
+            <div class="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-primary/8 to-transparent"></div>
+            <p class="eyebrow relative">Best fit</p>
+            <h2 class="relative mt-4 max-w-xs font-display text-3xl leading-tight tracking-[-0.04em] text-foreground">
+              Brought in when the product needs authority, speed, and less chaos.
+            </h2>
+            <ul class="relative mt-8 space-y-5 text-sm leading-relaxed text-muted-foreground md:text-base">
+              {fitStatements.map((item) => (
+                <li class="border-t border-border/70 pt-5">{item}</li>
               ))}
             </ul>
-            <div class="text-xs text-muted-foreground mb-4">Timeline: {pkg.timeline}</div>
-            <a href="/contact" class="inline-flex items-center text-sm font-medium text-primary hover:underline">
-              Get Started →
-            </a>
-          </Card>
-        ))}
+            <div class="relative mt-8 grid gap-4 border-t border-border/70 pt-5 text-sm text-muted-foreground sm:grid-cols-2">
+              <p>Remote from Spain</p>
+              <p>Direct with the person shipping the work</p>
+              <p>Discovery replies in 1-2 business days</p>
+              <p>Focused scopes over open-ended retainers</p>
+            </div>
+          </div>
+        </FadeIn>
       </div>
-      
-      <p class="text-center text-sm text-muted-foreground mt-8">
-        All packages include production-ready code with measurable business impact. <a href="/contact" class="text-primary hover:underline">Contact me</a> for pricing and availability.
-      </p>
-    </FadeIn>
+    </div>
   </section>
 
-  <section class="py-12">
-    <FadeIn client:visible delay={0.6}>
-      <h2 class="text-3xl font-bold mb-8 text-center">What Clients Say</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {testimonials.map((testimonial) => (
-          <Card className="p-6">
-            <div class="text-sm text-muted-foreground mb-4 leading-relaxed">
-              "{testimonial.quote}"
-            </div>
-            <div class="border-t border-border pt-4">
-              <div class="font-semibold text-sm">{testimonial.author}</div>
-              <div class="text-xs text-muted-foreground">{testimonial.company}</div>
-              <Badge variant="secondary" className="text-xs mt-2">{testimonial.context}</Badge>
-            </div>
-          </Card>
-        ))}
-      </div>
-      
-      <p class="text-center text-xs text-muted-foreground mt-6">
-        * Testimonials represent realistic examples and will be replaced with actual client feedback
-      </p>
-    </FadeIn>
+  <section class="border-b border-border/70 bg-surface/70">
+    <div class="site-container grid gap-8 py-10 md:grid-cols-3">
+      {proofPoints.map((point, index) => (
+        <FadeIn client:visible delay={index * 0.08}>
+          <article class="border-l border-border/70 pl-5">
+            <p class="font-display text-[2.6rem] tracking-[-0.05em] text-foreground">{point.value}</p>
+            <p class="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">{point.label}</p>
+          </article>
+        </FadeIn>
+      ))}
+    </div>
   </section>
 
-  <section class="py-12">
-    <FadeIn client:visible delay={0.7}>
-      <h2 class="text-3xl font-bold mb-2">How We'll Work Together</h2>
-      <p class="text-muted-foreground mb-8">Simple, transparent, and focused on shipping</p>
-      
-      <div class="space-y-4">
-        {processSteps.map((step) => (
-          <Card className="p-6 hover:shadow-md transition-all">
-            <div class="flex items-start gap-6">
-              <div class="text-4xl font-bold text-primary/20">{step.number}</div>
-              <div class="flex-1">
-                <h3 class="font-bold text-lg mb-2">{step.title}</h3>
-                <p class="text-sm text-muted-foreground">{step.description}</p>
-              </div>
-            </div>
-          </Card>
-        ))}
-      </div>
-    </FadeIn>
-  </section>
-
-  <section class="space-y-8 py-12">
-    <FadeIn client:visible delay={0.8}>
-      <div class="flex items-center justify-between">
-        <h2 class="text-3xl font-bold">More Projects</h2>
-        <a href="/projects" class="text-sm text-muted-foreground hover:text-foreground">View all &rarr;</a>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-        {projects.map((project) => (
-          <Card>
-            <div class="space-y-4">
-              <h3 class="font-bold text-lg">{project.data.title}</h3>
-              <p class="text-sm text-muted-foreground line-clamp-2">
-                {project.data.description}
-              </p>
-              <div class="flex flex-wrap gap-2">
-                {project.data.tags?.map((tag: string) => (
-                  <Badge>{tag}</Badge>
-                ))}
-              </div>
-            </div>
-          </Card>
-        ))}
-      </div>
-    </FadeIn>
-  </section>
-
-  {/* Newsletter section removed (moved to dedicated page) */}
-
-  <section class="py-20">
-    <FadeIn client:visible delay={0.9}>
-      <Card className="p-12 text-center bg-gradient-to-b from-muted/50 to-muted/20">
-        <h2 class="text-4xl font-bold mb-4">Ready to Ship Your Product?</h2>
-        <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Let's get your product live. Book a call and I'll send you a detailed proposal within 48 hours.
-        </p>
-        <p class="text-sm text-muted-foreground mb-8 max-w-xl mx-auto">
-          No agencies. No account managers. No overhead.<br/>Just senior engineering that ships.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a href="/contact" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8">
-            Start a Project
-          </a>
-          <a href="mailto:gianluca.galota@gmail.com" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-8">
-            Email Me
-          </a>
-          <a href="https://github.com/ThorOnTheRocks" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-8">
-            View GitHub
+  <section id="proof" class="site-container scroll-mt-24 py-20 md:py-28">
+    <div class="grid gap-12 lg:grid-cols-[280px_minmax(0,1fr)]">
+      <FadeIn client:visible>
+        <div class="lg:sticky lg:top-24">
+          <p class="eyebrow">Selected proof</p>
+          <h2 class="mt-4 section-title max-w-sm">
+            Client work presented as evidence, not an archive.
+          </h2>
+          <p class="mt-5 max-w-sm body-copy">
+            These engagements are the clearest indicators of the kind of product work I am usually hired to handle:
+            high-visibility launches, commercial redesigns, and release-sensitive rescue scopes.
+          </p>
+          <a
+            href="/projects"
+            class="mt-8 inline-flex text-sm font-medium text-foreground transition-colors hover:text-primary"
+          >
+            See the curated work page
           </a>
         </div>
-        
-        <div class="mt-12 pt-8 border-t border-border">
-          <div class="text-sm font-semibold text-muted-foreground">
-            Remote, Worldwide from Spain 🇪🇸 • English / Spanish / Italian / Portuguese
+      </FadeIn>
+
+      <div class="space-y-8">
+        {caseStudies.map((study, index) => (
+          <FadeIn client:visible delay={index * 0.08}>
+            <article class="overflow-hidden rounded-[2rem] border border-border/70 bg-surface/88">
+              <div class="grid gap-0 lg:grid-cols-[minmax(0,1fr)_320px]">
+                <div class="p-7 md:p-9">
+                  <p class="eyebrow">{study.sector}</p>
+                  <h3 class="mt-4 max-w-2xl font-display text-[2rem] leading-tight tracking-[-0.045em] text-foreground md:text-[2.5rem]">
+                    {study.title}
+                  </h3>
+                  <p class="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                    {study.challenge}
+                  </p>
+
+                  <div class="mt-8 grid gap-6 border-t border-border/70 pt-6 md:grid-cols-2">
+                    <div>
+                      <p class="eyebrow">Intervention</p>
+                      <p class="mt-3 text-sm leading-relaxed text-foreground/82 md:text-base">
+                        {study.intervention}
+                      </p>
+                    </div>
+                    <div>
+                      <p class="eyebrow">Outcome</p>
+                      <p class="mt-3 text-sm leading-relaxed text-foreground md:text-base">
+                        {study.outcome}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="border-t border-border/70 p-6 lg:border-l lg:border-t-0">
+                  <ProjectImage
+                    alt={study.title}
+                    placeholderLabel={study.placeholderLabel}
+                    className="aspect-[4/5] rounded-[1.5rem]"
+                  />
+                  <div class="mt-5 border-t border-border/70 pt-4">
+                    <p class="eyebrow">{study.company}</p>
+                    <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{study.detail}</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="border-y border-border/70 bg-muted/30 scroll-mt-24">
+    <div class="site-container py-20 md:py-24">
+      <FadeIn client:visible>
+        <div class="max-w-3xl">
+          <p class="eyebrow">Services</p>
+          <h2 class="mt-4 section-title">Three ways teams usually bring me in.</h2>
+          <p class="mt-5 max-w-2xl body-copy">
+            The offer stays deliberately narrow: focused scopes, senior ownership, and a product standard that
+            treats clarity and delivery quality as part of the same problem.
+          </p>
+        </div>
+      </FadeIn>
+
+      <div class="mt-12 divide-y divide-border/70 border-y border-border/70">
+        {engagementModes.map((mode, index) => (
+          <FadeIn client:visible delay={index * 0.08}>
+            <article class="grid gap-5 py-8 md:grid-cols-[160px_minmax(0,1fr)_220px] md:items-start">
+              <h3 class="font-display text-3xl tracking-[-0.04em] text-foreground">{mode.title}</h3>
+              <div>
+                <p class="text-base leading-relaxed text-foreground/85">{mode.summary}</p>
+                <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{mode.deliverables}</p>
+              </div>
+              <p class="text-sm text-muted-foreground md:text-right">{mode.timeline}</p>
+            </article>
+          </FadeIn>
+        ))}
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {authorityPillars.map((item, index) => (
+          <FadeIn client:visible delay={0.1 + index * 0.08}>
+            <article class="rounded-[1.5rem] border border-border/70 bg-surface/85 p-6">
+              <p class="eyebrow">{item.title}</p>
+              <p class="mt-4 text-base leading-relaxed text-muted-foreground">{item.description}</p>
+            </article>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="site-container py-20 md:py-24">
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px]">
+      <FadeIn client:visible>
+        <div>
+          <p class="eyebrow">Working process</p>
+          <h2 class="mt-4 section-title max-w-2xl">Structured enough to reduce risk, direct enough to keep momentum.</h2>
+          <div class="mt-8 divide-y divide-border/70 border-y border-border/70">
+            {processSteps.map((step, index) => (
+              <FadeIn client:visible delay={index * 0.08}>
+                <article class="grid gap-4 py-6 md:grid-cols-[120px_minmax(0,1fr)]">
+                  <p class="text-sm text-muted-foreground">{step.number}</p>
+                  <div>
+                    <h3 class="text-xl font-medium tracking-[-0.03em] text-foreground">{step.title}</h3>
+                    <p class="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                      {step.description}
+                    </p>
+                  </div>
+                </article>
+              </FadeIn>
+            ))}
           </div>
         </div>
-      </Card>
-    </FadeIn>
+      </FadeIn>
+
+      <FadeIn client:visible delay={0.16}>
+        <aside class="rounded-[2rem] border border-border/70 bg-accent/60 p-7">
+          <p class="eyebrow">What to expect</p>
+          <div class="mt-5 space-y-5 text-sm leading-relaxed text-muted-foreground md:text-base">
+            <p>
+              Most projects start with a concise project brief, a product link, and the main commercial or delivery risk.
+            </p>
+            <p>
+              The strongest enquiries usually have a concrete deadline, a real decision-maker, and a product surface that matters.
+            </p>
+            <p>
+              If the fit is right, I will reply with the next step rather than a long sales sequence.
+            </p>
+          </div>
+        </aside>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="border-t border-border/70">
+    <div class="site-container py-20 md:py-24">
+      <FadeIn client:visible>
+        <div class="grid gap-10 rounded-[2.4rem] border border-border/70 bg-surface/92 p-8 md:p-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-end">
+          <div>
+            <p class="eyebrow">Next project</p>
+            <h2 class="mt-4 font-display text-[2.8rem] leading-[0.96] tracking-[-0.05em] text-foreground md:text-[4.4rem]">
+              If the product needs to look sharper and ship with less friction, start here.
+            </h2>
+            <p class="mt-5 max-w-2xl body-copy">
+              Share the context, current constraint, and timeline. I will respond with fit, the right next step,
+              and whether the scope should be a launch, redesign, or rescue engagement.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <a
+              href="/contact"
+              class="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Start the project brief
+            </a>
+            <a
+              href="/about"
+              class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-border/80 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            >
+              Review profile and working style
+            </a>
+          </div>
+        </div>
+      </FadeIn>
+    </div>
   </section>
 </Layout>

@@ -24,3 +24,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local codex artifacts
+.agents/
+gianluca-galota-premium-client-conversion-audit.md

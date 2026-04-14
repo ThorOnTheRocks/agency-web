@@ -7,6 +7,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        display: [
+          'Iowan Old Style',
+          'Palatino Linotype',
+          'Book Antiqua',
+          'serif',
+        ],
         sans: ['Geist Sans', 'sans-serif'],
         mono: ['Geist Mono', 'monospace'],
       },
@@ -16,6 +22,18 @@ export default {
         muted: 'hsl(var(--muted))',
         'muted-foreground': 'hsl(var(--muted-foreground))',
         border: 'hsl(var(--border))',
+        surface: 'hsl(var(--surface))',
+        'surface-strong': 'hsl(var(--surface-strong))',
+        primary: 'hsl(var(--primary))',
+        'primary-foreground': 'hsl(var(--primary-foreground))',
+        secondary: 'hsl(var(--secondary))',
+        'secondary-foreground': 'hsl(var(--secondary-foreground))',
+        accent: 'hsl(var(--accent))',
+        'accent-foreground': 'hsl(var(--accent-foreground))',
+        card: 'hsl(var(--card))',
+        'card-foreground': 'hsl(var(--card-foreground))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
       },
       backgroundImage: {
         'gradient-radial':

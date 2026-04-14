@@ -5,7 +5,7 @@ publishedAt: 2024-03-20
 tags: ['astro', 'migration', 'cms']
 ---
 
-# Why the switch?
+## Why the switch?
 
 I realized that for a personal portfolio, a headless CMS like Sanity was overkill. Astro's built-in Content Collections offer:
 

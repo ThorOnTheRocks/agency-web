@@ -36,7 +36,7 @@ export const NewsletterSection = () => {
 
   return (
     <section className="py-24 relative overflow-hidden bg-muted/30 border-y border-border/50">
-      <div className="container relative mx-auto px-4 z-10">
+      <div className="site-container relative z-10">
         <div className="max-w-4xl mx-auto text-center">
             <FadeIn>
                 <h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground mb-6">

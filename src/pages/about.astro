@@ -1,92 +1,130 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { FadeIn, StaggerChildren, StaggerItem } from '../components/react/common/animations';
+import { FadeIn } from '../components/react/common/animations';
+import { siteConfig } from '../config/site';
+import { authorityPillars, fitStatements } from '../data/homepage';
+
+export const prerender = true;
+
+const authoritySignals = [
+  'Enterprise logistics and payment-sensitive surfaces where reliability matters.',
+  'Luxury commerce work where performance and presentation both shape trust.',
+  'Independent product scopes where senior judgment has to carry from UI to deployment.',
+];
 ---
 
-<Layout title="About Me">
-  <section class="space-y-12">
-    <FadeIn client:visible>
-      <div class="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8">
-        <div class="space-y-6">
-          <h1 class="text-4xl font-bold mb-6">About Me</h1>
-          <div class="prose dark:prose-invert max-w-none">
-            <p class="text-lg text-muted-foreground">
-              I'm a passionate Fullstack Engineer with a keen eye for design. 
-              I bridge the gap between robust backend architecture and beautiful frontend experiences.
-            </p>
-            <p class="text-muted-foreground">
-              With over 5 years of experience in the industry, I've had the privilege of working with startups and established companies alike. My approach is user-centric, focusing on performance, accessibility, and maintainability.
-            </p>
-          </div>
-          
-          <div class="flex gap-4 pt-4">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-foreground transition-colors">
-              GitHub
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-foreground transition-colors">
-              LinkedIn
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-foreground transition-colors">
-              Twitter
-            </a>
-          </div>
-        </div>
-        
-        <div class="relative aspect-[3/4] bg-muted/30 rounded-xl overflow-hidden border border-border flex items-center justify-center">
-          <p class="text-muted-foreground font-mono text-sm">[Profile Image Placeholder]</p>
-        </div>
-      </div>
-    </FadeIn>
-
-    <div class="mt-12">
-      <h2 class="text-2xl font-semibold mb-6">Tech Stack</h2>
-      <StaggerChildren client:visible className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {[
-          { category: "Frontend", items: ["React", "Next.js", "Astro", "TypeScript", "Tailwind CSS"] },
-          { category: "Backend", items: ["Node.js", "PostgreSQL", "Drizzle ORM", "Serverless"] },
-          { category: "Tools", items: ["Git", "Docker", "Figma", "VS Code"] }
-        ].map((stack) => (
-          <StaggerItem>
-            <div class="p-4 rounded-lg border border-border bg-card h-full">
-              <h3 class="font-medium mb-2 text-foreground">{stack.category}</h3>
-              <ul class="space-y-1">
-                {stack.items.map(item => (
-                  <li class="text-sm text-muted-foreground">{item}</li>
-                ))}
-              </ul>
+<Layout title="Profile" fullBleed>
+  <section class="border-b border-border/70">
+    <div class="site-container py-14 md:py-20">
+      <FadeIn client:visible>
+        <div class="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_320px] lg:items-end">
+          <div>
+            <p class="eyebrow">Profile</p>
+            <h1 class="mt-4 section-title max-w-3xl">
+              Senior product judgment for teams that need confidence quickly.
+            </h1>
+            <div class="mt-6 max-w-2xl space-y-4 body-copy">
+              <p>
+                I work across interface quality, frontend architecture, and delivery-critical product work.
+                The value is not only in implementation. It is in making the product feel more credible,
+                clarifying the decision that matters, and shipping it without unnecessary layers.
+              </p>
+              <p>
+                My background spans enterprise platforms, payment-sensitive flows, and luxury commerce.
+                That mix tends to be useful when a team needs both technical range and a sharper bar for what the product should feel like.
+              </p>
             </div>
-          </StaggerItem>
-        ))}
-      </StaggerChildren>
-    </div>
-
-    <FadeIn client:visible delay={0.2}>
-      <h2 class="text-2xl font-semibold mb-4">Journey</h2>
-      <div class="border-l-2 border-border pl-6 space-y-8">
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1 h-4 w-4 rounded-full bg-primary border-4 border-background"></div>
-          <h3 class="font-medium">Senior Engineer @ Tech Corp</h3>
-          <p class="text-sm text-muted-foreground">2022 - Present</p>
-          <p class="mt-2 text-muted-foreground">Leading frontend architecture and design systems.</p>
-        </div>
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1 h-4 w-4 rounded-full bg-muted-foreground/30 border-4 border-background"></div>
-          <h3 class="font-medium">Fullstack Developer @ Startup Inc</h3>
-          <p class="text-sm text-muted-foreground">2019 - 2022</p>
-          <p class="mt-2 text-muted-foreground">Built scalable web apps from zero to one.</p>
-        </div>
-      </div>
-    </FadeIn>
-
-    <FadeIn client:visible delay={0.4}>
-      <h2 class="text-2xl font-semibold mb-4">Interests</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {['Photography', 'Hiking', 'Coffee', 'Mechanical Keyboards'].map((item) => (
-          <div class="p-4 rounded-lg border border-border bg-card text-card-foreground text-center hover:scale-105 transition-transform cursor-default">
-            {item}
           </div>
+
+          <div class="rounded-[1.75rem] border border-border/70 bg-surface/88 p-6 text-sm text-muted-foreground">
+            <p class="eyebrow">Working style</p>
+            <ul class="mt-4 space-y-3 leading-relaxed">
+              <li>Remote from Spain, collaborating internationally.</li>
+              <li>English, Spanish, Italian, and Portuguese.</li>
+              <li>Direct communication, focused scopes, visible progress.</li>
+              <li>Best with teams that want decisions made and shipped.</li>
+            </ul>
+
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">
+                LinkedIn
+              </a>
+              <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">
+                GitHub
+              </a>
+              <a href={`mailto:${siteConfig.author.email}`} class="transition-colors hover:text-foreground">
+                Email
+              </a>
+            </div>
+          </div>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="site-container py-14 md:py-20">
+    <div class="grid gap-12 lg:grid-cols-[280px_minmax(0,1fr)]">
+      <FadeIn client:visible>
+        <div>
+          <p class="eyebrow">Why clients hire me</p>
+          <h2 class="mt-4 section-title max-w-sm">The useful part is judgment as much as craft.</h2>
+        </div>
+      </FadeIn>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        {authorityPillars.map((item, index) => (
+          <FadeIn client:visible delay={index * 0.08}>
+            <article class="rounded-[1.5rem] border border-border/70 bg-surface/88 p-6">
+              <p class="eyebrow">{item.title}</p>
+              <p class="mt-4 text-base leading-relaxed text-muted-foreground">{item.description}</p>
+            </article>
+          </FadeIn>
         ))}
       </div>
-    </FadeIn>
+    </div>
+  </section>
+
+  <section class="border-y border-border/70 bg-muted/30">
+    <div class="site-container py-14 md:py-20">
+      <div class="grid gap-12 lg:grid-cols-[280px_minmax(0,1fr)]">
+        <FadeIn client:visible>
+          <div>
+            <p class="eyebrow">Authority signals</p>
+            <h2 class="mt-4 section-title max-w-sm">Experience that supports high-trust product work.</h2>
+          </div>
+        </FadeIn>
+
+        <div class="divide-y divide-border/70 border-y border-border/70">
+          {authoritySignals.map((item, index) => (
+            <FadeIn client:visible delay={index * 0.08}>
+              <article class="py-6">
+                <p class="max-w-3xl text-base leading-relaxed text-foreground/86 md:text-lg">{item}</p>
+              </article>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="site-container py-14 md:py-20">
+    <div class="grid gap-12 lg:grid-cols-[280px_minmax(0,1fr)]">
+      <FadeIn client:visible>
+        <div>
+          <p class="eyebrow">Best fit</p>
+          <h2 class="mt-4 section-title max-w-sm">The kind of work where this model is most useful.</h2>
+        </div>
+      </FadeIn>
+
+      <div class="grid gap-5">
+        {fitStatements.map((item, index) => (
+          <FadeIn client:visible delay={index * 0.08}>
+            <article class="rounded-[1.4rem] border border-border/70 bg-surface/88 px-6 py-5">
+              <p class="text-base leading-relaxed text-foreground/86">{item}</p>
+            </article>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
   </section>
 </Layout>

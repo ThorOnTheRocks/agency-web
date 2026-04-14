@@ -1,166 +1,116 @@
-export const capabilities = [
-  {
-    icon: '⚡',
-    title: 'Your App is Too Slow',
-    description: 'Speed = Revenue. I\'ll optimize your product to load 2x faster, reducing bounce rates and increasing conversions.',
-    deliverables: 'Performance audit, optimization roadmap, implementation, before/after metrics',
-    timeline: '2-3 weeks'
-  },
-  {
-    icon: '🚀',
-    title: 'You Need to Ship Fast',
-    description: 'Every week of delay costs money. I build production-ready features in weeks, not months.',
-    deliverables: 'Full-stack development, testing, deployment, documentation',
-    timeline: '4-12 weeks'
-  },
-  {
-    icon: '🛍️',
-    title: 'Your E-commerce Experience Doesn\'t Convert',
-    description: 'Poor UX kills sales. I\'ll build seamless shopping experiences that turn visitors into customers.',
-    deliverables: 'Modern frontend, payment integration, mobile optimization, analytics',
-    timeline: '6-10 weeks'
-  },
-  {
-    icon: '🐛',
-    title: 'Bugs Keep Breaking Production',
-    description: 'Unreliable code destroys trust. I implement comprehensive testing to ship with confidence.',
-    deliverables: 'Test strategy, unit/integration/E2E tests, CI/CD setup, documentation',
-    timeline: '3-4 weeks'
-  },
-  {
-    icon: '♿',
-    title: 'You\'re Excluding Customers',
-    description: 'Inaccessible products lose customers and face legal risk. I ensure everyone can use your product.',
-    deliverables: 'Accessibility audit, WCAG compliance, screen reader optimization, training',
-    timeline: '2-3 weeks'
-  },
-  {
-    icon: '🔧',
-    title: 'You Need End-to-End Ownership',
-    description: 'Tired of coordinating multiple developers? I handle frontend, backend, deployment—everything.',
-    deliverables: 'Full-stack architecture, API design, database, frontend, deployment',
-    timeline: '6-12 weeks'
-  }
-];
-
 export const caseStudies = [
   {
-    company: 'Inditex',
-    logo: '🏢',
-    title: 'Global Logistics Platform',
-    problem: 'Scale logistics for world\'s largest fashion retailer',
-    solution: 'Micro-frontend architecture + scalable state management',
-    result: 'Seamless scalability for global operations',
-    tech: ['React', 'MFE', 'Zustand', 'Context API']
+    company: 'Tod\'s Group',
+    sector: 'Luxury commerce',
+    title: 'Rebuilt four storefronts around one faster, more coherent frontend system',
+    challenge: 'The group needed a way to maintain distinct luxury brand experiences without carrying four disconnected ecommerce implementations.',
+    intervention: 'Designed a shared frontend foundation, tightened the component system, and paired the migration work with a stronger performance baseline.',
+    outcome: 'Roughly 50% faster storefront performance with a calmer delivery model across multiple premium brands.',
+    detail: 'Shared system, Next.js migration, cross-brand rollout',
+    placeholderLabel: 'Luxury commerce visual pending'
   },
   {
     company: 'OpenBank',
-    logo: '🏦',
-    title: 'Payment Module Optimization',
-    problem: 'Slow, unreliable payment processing',
-    solution: 'Performance optimization + micro-frontend refactor',
-    result: '20% performance improvement + 80% test coverage',
-    tech: ['React', 'TypeScript', 'Jest', 'MFE']
+    sector: 'Payments',
+    title: 'Stabilized a payment-critical surface that could not afford regressions',
+    challenge: 'A slow, brittle payment module was hurting confidence in a flow where reliability mattered as much as speed.',
+    intervention: 'Refactored the frontend architecture, improved performance bottlenecks, and introduced stronger automated coverage around the critical path.',
+    outcome: '20% performance improvement alongside 80% test coverage on the most sensitive payment behaviour.',
+    detail: 'Performance, architecture, testing, release confidence',
+    placeholderLabel: 'Payment workflow visual pending'
   },
   {
-    company: 'Tod\'s Group',
-    logo: '👜',
-    title: 'Luxury E-commerce Suite',
-    problem: 'Maintain 4 luxury brand stores efficiently',
-    solution: 'Shared component library + Next.js migration',
-    result: '50% performance boost, unified codebase',
-    tech: ['Next.js 13', 'Redux Saga', 'PWA']
+    company: 'Inditex',
+    sector: 'Enterprise logistics',
+    title: 'Shaped frontend infrastructure for a logistics platform built to scale globally',
+    challenge: 'The platform had to support large operational complexity without turning the interface into delivery friction for the teams using it.',
+    intervention: 'Worked across frontend architecture, shared state, and implementation detail to keep the product scalable without sacrificing clarity.',
+    outcome: 'A more stable operational surface for a globally distributed logistics environment.',
+    detail: 'Architecture, state design, scale-sensitive delivery',
+    placeholderLabel: 'Enterprise platform visual pending'
   }
 ];
 
 export const companies = [
-  { name: 'Inditex', icon: '🏢' },
-  { name: 'OpenBank', icon: '🏦' },
-  { name: 'BPI Bank', icon: '🏦' },
-  { name: 'Tod\'s', icon: '👜' },
-  { name: 'Roger Vivier', icon: '👠' },
-  { name: 'Oakland', icon: '🏛️' }
+  { name: 'Inditex' },
+  { name: 'OpenBank' },
+  { name: 'BPI Bank' },
+  { name: 'Tod\'s' },
+  { name: 'Roger Vivier' },
+  { name: 'Oakland' }
 ];
 
-export const stats = [
-  { value: '4-12 weeks', label: 'From Brief to Launch' },
-  { value: 'Full-Stack', label: 'Testing Coverage' },
-  { value: '50%+', label: 'Performance Improvements' },
-  { value: '48h', label: 'Proposal Turnaround' },
-  { value: 'Production-Ready', label: 'Code Quality' }
+export const proofPoints = [
+  {
+    value: '4-12 weeks',
+    label: 'Focused launch and redesign scopes from brief to production.',
+  },
+  {
+    value: '50%+',
+    label: 'Performance gains delivered on selected commerce work.',
+  },
+  {
+    value: '80%',
+    label: 'Coverage brought into payment-sensitive flows to reduce delivery risk.',
+  },
 ];
 
-export const techStack = {
-  'Frontend Core': ['React', 'Next.js', 'TypeScript', 'Astro'],
-  'State & Data': ['Redux', 'Zustand', 'React Query', 'GraphQL'],
-  'Architecture': ['Micro Frontends', 'Design Systems', 'Performance'],
-  'Testing & Quality': ['Jest', 'Vitest', 'RTL', '80% coverage'],
-  'Backend': ['Node.js', 'Express', 'NestJS', 'PostgreSQL', 'MongoDB'],
-  'DevOps': ['Docker', 'AWS', 'Git', 'CI/CD']
-};
-
-export const servicePackages = [
+export const engagementModes = [
   {
-    title: 'Product Rescue',
-    subtitle: 'Fix What\'s Broken, Fast',
-    perfectFor: 'Slow apps, technical debt, failing launches',
-    features: [
-      'Complete product audit (performance, security, architecture)',
-      'Prioritized action plan with quick wins',
-      '2 weeks of implementation',
-      'Video walkthrough of all findings'
-    ],
-    timeline: '2 weeks'
+    title: 'Launch',
+    summary: 'For new products, new surfaces, and high-stakes releases that need senior judgment without agency drag.',
+    deliverables: 'Product shaping, interface build, backend glue, QA, deployment',
+    timeline: 'Best for 4-12 week scopes',
   },
   {
-    title: 'Launch Sprint',
-    subtitle: 'Zero to Production in 4-12 Weeks',
-    perfectFor: 'New product features, MVP launches, technical rescues',
-    features: [
-      'Full-stack development (frontend + backend + deployment)',
-      'Comprehensive testing (unit, integration, E2E)',
-      'Performance optimization built-in',
-      'Documentation & handoff'
-    ],
-    timeline: '4-12 weeks'
+    title: 'Redesign',
+    summary: 'For products that technically work but are losing trust, clarity, or conversion at the interface level.',
+    deliverables: 'UX reframing, frontend cleanup, performance tuning, stronger product finish',
+    timeline: 'Best for 3-8 week scopes',
   },
   {
-    title: 'Fractional Engineering',
-    subtitle: 'Senior Guidance, Month-to-Month',
-    perfectFor: 'Growing startups needing strategic technical leadership',
-    features: [
-      '10-20 hours/month of senior engineering',
-      'Architecture decisions & code reviews',
-      'Team mentorship & best practices',
-      'Strategic technical planning'
-    ],
-    timeline: 'Flexible monthly commitment'
+    title: 'Rescue',
+    summary: 'For teams slowed down by weak UX, brittle delivery, or release risk in product-critical areas.',
+    deliverables: 'Focused audit, implementation cleanup, testing strategy, handoff',
+    timeline: 'Best for 2-6 week interventions',
   }
 ];
 
-export const testimonials = [
+export const authorityPillars = [
   {
-    quote: 'Gianluca delivered a critical payment module refactor that improved our performance by 20% and brought test coverage to 80%. His attention to quality and enterprise-grade standards was exceptional.',
-    author: 'Engineering Manager',
-    company: 'Major Banking Institution',
-    context: 'Enterprise Client'
+    title: 'Product judgment before production noise',
+    description: 'The work starts with what needs to change in the product, not with a pile of implementation language.',
   },
   {
-    quote: 'Working across four luxury brand e-commerce platforms, Gianluca maintained consistency while delivering a 50% performance improvement. His full-stack expertise was invaluable.',
-    author: 'Technical Lead',
-    company: 'Luxury Fashion Group',
-    context: 'E-commerce Client'
+    title: 'Senior execution across the full stack',
+    description: 'Frontend, backend integration, testing, and deployment handled as one coherent delivery problem.',
   },
   {
-    quote: 'Gianluca\'s product engineering mindset sets him apart. He doesn\'t just write code—he ships production-ready features that generate real business value.',
-    author: 'CTO',
-    company: 'Growing Startup',
-    context: 'Startup Client'
-  }
+    title: 'Calm delivery for high-stakes work',
+    description: 'Direct communication, visible progress, and fewer layers between the decision and the shipped result.',
+  },
+];
+
+export const fitStatements = [
+  'Founder-led or product-led teams that need credibility quickly.',
+  'Redesigns where trust, clarity, or conversion have started to slip.',
+  'Launches or rescue scopes where one senior operator can move faster than a larger team.',
 ];
 
 export const processSteps = [
-  { number: '01', title: 'Quick Discovery (48 hours)', description: 'Share your goals, I\'ll send you a detailed proposal with timeline and pricing. No lengthy sales calls.' },
-  { number: '02', title: 'Build & Ship (4-12 weeks)', description: 'Weekly demos, continuous deployment, regular communication. You\'ll see progress every single week.' },
-  { number: '03', title: 'Launch & Handoff', description: 'Production deployment, complete documentation, training session. You own everything.' }
+  {
+    number: '01',
+    title: 'Qualify the problem',
+    description: 'You share the product, context, and deadline. I respond with fit, direction, and the next step.',
+  },
+  {
+    number: '02',
+    title: 'Set a focused scope',
+    description: 'We tighten the engagement around the decision, surface, or release that matters most right now.',
+  },
+  {
+    number: '03',
+    title: 'Ship with less chaos',
+    description: 'Weekly progress, direct communication, and a handoff that leaves the product stronger than it started.',
+  },
 ];

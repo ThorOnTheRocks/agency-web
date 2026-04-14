@@ -16,20 +16,29 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<Layout title={post.data.title}>
-  <article class="max-w-2xl mx-auto pt-12 pb-20">
-    <header class="mb-10 text-center">
-        <div class="text-xs font-mono text-muted-foreground mb-4">
+<Layout title={post.data.title} fullBleed>
+  <section class="border-b border-border/70">
+    <div class="site-container py-14 md:py-20">
+      <article class="mx-auto max-w-3xl">
+        <header>
+          <p class="eyebrow">Writing</p>
+          <div class="mt-4 text-xs uppercase tracking-[0.18em] text-muted-foreground">
             {post.data.publishedAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-        </div>
-        <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
+          </div>
+          <h1 class="mt-4 font-display text-4xl leading-tight tracking-[-0.05em] md:text-5xl">
             {post.data.title}
-        </h1>
-        <div class="w-20 h-1 bg-white/10 mx-auto rounded-full"></div>
-    </header>
-
-    <div class="prose prose-invert prose-neutral max-w-none prose-p:text-muted-foreground prose-headings:text-foreground prose-a:text-blue-400 hover:prose-a:text-blue-300">
-      <Content />
+          </h1>
+          <div class="mt-6 h-px w-24 bg-border"></div>
+        </header>
+      </article>
     </div>
-  </article>
+  </section>
+
+  <section class="site-container py-14 md:py-20">
+    <article class="mx-auto max-w-3xl">
+      <div class="prose prose-neutral max-w-none prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-li:text-muted-foreground hover:prose-a:text-primary/80 dark:prose-invert">
+        <Content />
+      </div>
+    </article>
+  </section>
 </Layout>

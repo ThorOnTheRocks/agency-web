@@ -17,6 +17,13 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    kind: z.enum(['client', 'independent']).default('independent'),
+    client: z.string().optional(),
+    sector: z.string().optional(),
+    challenge: z.string().optional(),
+    intervention: z.string().optional(),
+    outcome: z.string().optional(),
+    featured: z.boolean().optional(),
     link: z.string().url().optional(),
     github: z.string().url().optional(),
     heroImage: z.string().optional(),

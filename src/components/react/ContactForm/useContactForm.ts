@@ -27,10 +27,10 @@ export const useContactForm = () => {
       }
 
       setStatus('success');
-      (e.target as HTMLFormElement).reset();
-    } catch (error: any) {
+      e.currentTarget.reset();
+    } catch (error) {
       setStatus('error');
-      setErrorMessage(error.message || 'Something went wrong. Please try again.');
+      setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
     }
   };
 

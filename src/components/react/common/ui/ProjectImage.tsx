@@ -3,10 +3,12 @@ import { cn } from '../../../../lib/util';
 export const ProjectImage = ({
   src,
   alt,
+  placeholderLabel = 'Visual in preparation',
   className,
 }: {
   src?: string;
   alt: string;
+  placeholderLabel?: string;
   className?: string;
 }) => {
   if (src) {
@@ -25,13 +27,15 @@ export const ProjectImage = ({
   return (
     <div
       className={cn(
-        'w-full h-full flex items-center justify-center bg-neutral-900 border-b border-white/5 relative overflow-hidden',
+        'relative flex h-full w-full items-center justify-center overflow-hidden border border-border/70 bg-surface',
         className
       )}
     >
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-      <div className="text-xs font-mono text-neutral-500 uppercase tracking-widest border border-neutral-800 px-2 py-1 rounded bg-black/50 backdrop-blur-sm">
-        No Asset
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:28px_28px] opacity-40"></div>
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background/90 to-transparent"></div>
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background/70 to-transparent"></div>
+      <div className="rounded-full border border-border/80 bg-background/88 px-4 py-2 text-[0.7rem] uppercase tracking-[0.22em] text-muted-foreground backdrop-blur-sm">
+        {placeholderLabel}
       </div>
     </div>
   );

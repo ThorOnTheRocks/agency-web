@@ -1,7 +1,12 @@
 export interface ContactFormData {
   name: string;
   email: string;
-  subject?: string;
+  companyOrTeam: string;
+  projectType: string;
+  projectStage: string;
+  budgetRange: string;
+  timeline: string;
+  websiteOrProductUrl?: string;
   message: string;
 }
 export interface ContactApiResponse {

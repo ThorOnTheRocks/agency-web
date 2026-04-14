@@ -3,7 +3,7 @@
  */
 export const siteConfig = {
   name: 'Gianluca Galota',
-  description: 'Full-stack developer, designer, and creator',
+  description: 'Premium product engineering for launch, redesign, and rescue work.',
   url: 'https://gianlucagalota.com',
   links: {
     github: 'https://github.com/gianlucagalota',

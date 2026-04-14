@@ -4,28 +4,104 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --border: 0 0% 89.8%;
+    --background: 34 43% 96%;
+    --foreground: 18 20% 12%;
+    --muted: 30 24% 92%;
+    --muted-foreground: 18 11% 34%;
+    --border: 24 18% 80%;
+    --surface: 35 44% 98%;
+    --surface-strong: 18 22% 14%;
+    --primary: 16 78% 49%;
+    --primary-foreground: 35 44% 97%;
+    --secondary: 30 28% 92%;
+    --secondary-foreground: 18 20% 12%;
+    --accent: 32 33% 94%;
+    --accent-foreground: 18 20% 12%;
+    --card: 35 44% 98%;
+    --card-foreground: 18 20% 12%;
+    --input: 24 18% 72%;
+    --ring: 16 82% 52%;
   }
 
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --border: 0 0% 14.9%;
+    --background: 18 18% 8%;
+    --foreground: 34 28% 93%;
+    --muted: 20 12% 15%;
+    --muted-foreground: 28 14% 68%;
+    --border: 20 14% 24%;
+    --surface: 20 16% 10%;
+    --surface-strong: 34 28% 93%;
+    --primary: 19 88% 60%;
+    --primary-foreground: 18 18% 8%;
+    --secondary: 20 12% 16%;
+    --secondary-foreground: 34 28% 93%;
+    --accent: 20 12% 14%;
+    --accent-foreground: 34 28% 93%;
+    --card: 20 16% 11%;
+    --card-foreground: 34 28% 93%;
+    --input: 20 14% 24%;
+    --ring: 19 88% 60%;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased selection:bg-white selection:text-black dark:selection:bg-black dark:selection:text-white;
+    @apply bg-background text-foreground font-sans antialiased;
+    background:
+      linear-gradient(180deg, hsl(var(--surface)) 0%, hsl(var(--background)) 18%, hsl(var(--background)) 100%);
+    min-height: 100vh;
+  }
+
+  .dark body {
+    background-image:
+      radial-gradient(circle at top right, hsl(var(--primary) / 0.16), transparent 24%),
+      linear-gradient(180deg, hsl(var(--surface) / 0.65), transparent 24%);
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  a {
+    color: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .site-container {
+    width: min(100% - 2rem, 78rem);
+    margin-inline: auto;
+  }
+
+  .eyebrow {
+    @apply text-[0.72rem] font-medium uppercase tracking-[0.24em] text-muted-foreground;
+  }
+
+  .section-title {
+    @apply font-display text-[2.6rem] leading-[0.98] tracking-[-0.045em] md:text-[4rem];
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .body-copy {
+    @apply text-base leading-relaxed text-muted-foreground md:text-lg;
   }
 }
 
 @layer utilities {
   .glass-panel {
-    @apply bg-white/50 dark:bg-black/50 border border-border backdrop-blur-md;
+    @apply border border-border/70 bg-card/80 backdrop-blur-md;
   }
 }

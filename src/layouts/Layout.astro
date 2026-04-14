@@ -1,19 +1,25 @@
 ---
 import '../styles/global.css'
 import { ClientRouter } from 'astro:transitions';
-import { ThemeToggle } from '../components/react/ThemeToggle';
+import { siteConfig } from '../config/site';
 
 import { PageTransition } from '../components/react/common/animations';
-import ThemeScript from '../components/ThemeScript.astro';
 import '@fontsource/geist-sans';
 import '@fontsource/geist-mono';
 
 interface Props {
   title: string;
   description?: string;
+  fullBleed?: boolean;
 }
 
-const { title, description = "Fullstack Engineer & UI Specialist" } = Astro.props;
+const {
+  title,
+  description = 'Independent product engineer focused on fast, credible digital products.',
+  fullBleed = false,
+} = Astro.props;
+
+const pageTitle = title === siteConfig.name ? title : `${title} | ${siteConfig.name}`;
 ---
 
 <!doctype html>
@@ -23,35 +29,82 @@ const { title, description = "Fullstack Engineer & UI Specialist" } = Astro.prop
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     <ClientRouter />
-    <ThemeScript />
   </head>
   <body class="bg-background text-foreground min-h-screen flex flex-col">
-    
-    <nav class="sticky top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
-      <div class="max-w-4xl mx-auto flex h-14 items-center justify-between px-4">
-        <a href="/" class="font-bold font-mono">gianluca_galota.portfolio</a>
-        <div class="flex gap-6 text-sm font-medium text-muted-foreground items-center">
-          <a href="/about" class="hover:text-foreground transition-colors">About</a>
-          <a href="/projects" class="hover:text-foreground transition-colors">Portfolio</a>
-          <a href="/blog" class="hover:text-foreground transition-colors">Blog</a>
-          <a href="/contact" class="hover:text-foreground transition-colors">Contact</a>
-          <ThemeToggle client:idle />
+    <nav class="sticky top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-xl">
+      <div class="site-container flex h-16 items-center justify-between gap-6">
+        <a href="/" class="flex flex-col leading-none text-foreground">
+          <span class="font-display text-xl tracking-[-0.04em]">Gianluca Galota</span>
+          <span class="mt-1 text-[0.68rem] uppercase tracking-[0.2em] text-muted-foreground">
+            Launch, redesign, rescue
+          </span>
+        </a>
+        <div class="flex items-center gap-4 text-sm text-muted-foreground md:gap-6">
+          <div class="hidden items-center gap-6 md:flex">
+            <a href="/#services" class="transition-colors hover:text-foreground">Services</a>
+            <a href="/#proof" class="transition-colors hover:text-foreground">Proof</a>
+            <a href="/about" class="transition-colors hover:text-foreground">Profile</a>
+            <a href="/blog" class="transition-colors hover:text-foreground">Writing</a>
+            <a
+              href="/contact"
+              class="inline-flex min-h-10 items-center justify-center rounded-full bg-foreground px-5 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+            >
+              Start a conversation
+            </a>
+          </div>
+          <details class="relative md:hidden">
+            <summary class="list-none cursor-pointer text-sm transition-colors hover:text-foreground">
+              Menu
+            </summary>
+            <div class="absolute right-0 top-[calc(100%+0.75rem)] min-w-40 rounded-2xl border border-border/80 bg-background/95 p-3 shadow-[0_24px_60px_-36px_rgba(0,0,0,0.65)] backdrop-blur-xl">
+              <div class="flex flex-col gap-1">
+                <a href="/#services" class="rounded-xl px-3 py-2 transition-colors hover:bg-accent hover:text-foreground">Services</a>
+                <a href="/#proof" class="rounded-xl px-3 py-2 transition-colors hover:bg-accent hover:text-foreground">Proof</a>
+                <a href="/about" class="rounded-xl px-3 py-2 transition-colors hover:bg-accent hover:text-foreground">Profile</a>
+                <a href="/blog" class="rounded-xl px-3 py-2 transition-colors hover:bg-accent hover:text-foreground">Writing</a>
+                <a href="/contact" class="rounded-xl px-3 py-2 transition-colors hover:bg-accent hover:text-foreground">Contact</a>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
     </nav>
 
-    <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-8">
+    <main class:list={[
+      'flex-1 w-full',
+      fullBleed ? '' : 'site-container py-8 md:py-10',
+    ]}>
       <PageTransition client:load>
         <slot />
       </PageTransition>
     </main>
 
-    <footer class="border-t border-border/40 py-6 text-center text-xs text-muted-foreground flex flex-col items-center gap-4">
-
-      <p>© {new Date().getFullYear()} Built with Astro, React, & Neon.</p>
+    <footer class="border-t border-border/60 py-8 text-sm text-muted-foreground">
+      <div class="site-container flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div class="max-w-md">
+          <p class="text-foreground">© {new Date().getFullYear()} {siteConfig.name}</p>
+          <p class="mt-1">Premium product engineering for launch, redesign, and rescue work.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="/projects" class="transition-colors hover:text-foreground">
+            Selected work
+          </a>
+          <a href="/about" class="transition-colors hover:text-foreground">
+            About
+          </a>
+          <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">
+            GitHub
+          </a>
+          <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">
+            LinkedIn
+          </a>
+          <a href={`mailto:${siteConfig.author.email}`} class="transition-colors hover:text-foreground">
+            {siteConfig.author.email}
+          </a>
+        </div>
+      </div>
     </footer>
-
   </body>
 </html>
