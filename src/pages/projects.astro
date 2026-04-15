@@ -50,7 +50,7 @@ const independentProjects = projects.filter((project) => project.data.kind !== '
       <div class="space-y-8">
         {caseStudies.map((study, index) => (
           <FadeIn client:visible delay={index * 0.08}>
-            <article class="overflow-hidden rounded-[2rem] border border-border/70 bg-surface/88">
+            <article class="group overflow-hidden rounded-[2rem] border border-border/70 bg-surface/88">
               <div class="grid gap-0 lg:grid-cols-[minmax(0,1fr)_320px]">
                 <div class="p-7 md:p-9">
                   <div class="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
@@ -104,87 +104,83 @@ const independentProjects = projects.filter((project) => project.data.kind !== '
       <div class="grid gap-12 lg:grid-cols-[260px_minmax(0,1fr)]">
         <FadeIn client:visible>
           <div>
-            <p class="eyebrow">Independent work</p>
-            <h2 class="mt-4 section-title max-w-sm">Secondary signals, not the main sales story.</h2>
+            <p class="eyebrow">Legacy portfolio</p>
+            <h2 class="mt-4 section-title max-w-sm">Earlier builds and supporting range.</h2>
             <p class="mt-5 max-w-sm body-copy">
-              Independent builds still matter because they show initiative and range. They sit here as supporting evidence, not as a substitute for client proof.
+              These projects were migrated from the previous portfolio. They sit here as supporting evidence:
+              smaller launches, experiments, and earlier application work that still show execution range.
             </p>
           </div>
         </FadeIn>
 
-        <div class="grid gap-6">
+        <div class="grid gap-6 md:grid-cols-2">
           {independentProjects.length > 0 ? independentProjects.map((project, index) => (
             <FadeIn client:visible delay={index * 0.08}>
-              <article class="overflow-hidden rounded-[2rem] border border-border/70 bg-surface/88">
-                <div class="grid gap-0 md:grid-cols-[280px_minmax(0,1fr)]">
-                  <div class="p-6">
-                    <ProjectImage
-                      src={project.data.heroImage}
-                      alt={project.data.title}
-                      placeholderLabel="Independent build visual pending"
-                      className="aspect-[4/5] rounded-[1.4rem]"
-                    />
+              <article class="group overflow-hidden rounded-[1.75rem] border border-border/70 bg-surface/88">
+                <div class="border-b border-border/70 bg-accent/20 p-4">
+                  <ProjectImage
+                    src={project.data.heroImage}
+                    alt={project.data.title}
+                    placeholderLabel="Project visual pending"
+                    className="aspect-[16/10] rounded-[1.25rem]"
+                  />
+                </div>
+
+                <div class="p-6">
+                  <div class="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                    {project.data.client && <p>{project.data.client}</p>}
+                    {project.data.client && project.data.sector && (
+                      <span class="hidden h-1 w-1 rounded-full bg-border sm:inline-flex"></span>
+                    )}
+                    <p>{project.data.sector || 'Supporting project'}</p>
                   </div>
-                  <div class="border-t border-border/70 p-7 md:border-l md:border-t-0">
-                    <p class="eyebrow">{project.data.sector || 'Independent build'}</p>
-                    <h3 class="mt-4 font-display text-[2rem] leading-tight tracking-[-0.045em] text-foreground">
-                      {project.data.title}
-                    </h3>
-                    <p class="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                      {project.data.description}
-                    </p>
 
-                    <div class="mt-8 grid gap-6 border-t border-border/70 pt-6 md:grid-cols-3">
-                      <div>
-                        <p class="eyebrow">Challenge</p>
-                        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
-                          {project.data.challenge || 'Create a stronger personal platform for premium client acquisition.'}
-                        </p>
-                      </div>
-                      <div>
-                        <p class="eyebrow">Intervention</p>
-                        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
-                          {project.data.intervention || 'Sharper content framing, cleaner hierarchy, and a more selective conversion path.'}
-                        </p>
-                      </div>
-                      <div>
-                        <p class="eyebrow">Outcome</p>
-                        <p class="mt-3 text-sm leading-relaxed text-foreground">
-                          {project.data.outcome || 'A more credible and commercially aligned digital presence.'}
-                        </p>
-                      </div>
-                    </div>
+                  <h3 class="mt-4 font-display text-[1.85rem] leading-tight tracking-[-0.045em] text-foreground">
+                    {project.data.title}
+                  </h3>
+                  <p class="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
+                    {project.data.description}
+                  </p>
 
-                    <div class="mt-8 flex flex-wrap gap-3">
-                      {project.data.link && (
-                        <a
-                          href={project.data.link}
-                          target="_blank"
-                          rel="noopener"
-                          class="inline-flex min-h-11 items-center justify-center rounded-full border border-border/80 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-                        >
-                          Visit live site
-                        </a>
-                      )}
-                      {project.data.github && (
-                        <a
-                          href={project.data.github}
-                          target="_blank"
-                          rel="noopener"
-                          class="inline-flex min-h-11 items-center justify-center rounded-full border border-border/80 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-                        >
-                          Review source
-                        </a>
-                      )}
+                  {project.data.tags?.length ? (
+                    <div class="mt-5 flex flex-wrap gap-2">
+                      {project.data.tags.map((tag) => (
+                        <span class="rounded-full border border-border/70 px-3 py-1 text-[0.72rem] uppercase tracking-[0.18em] text-muted-foreground">
+                          {tag}
+                        </span>
+                      ))}
                     </div>
+                  ) : null}
+
+                  <div class="mt-6 flex flex-wrap gap-3 border-t border-border/70 pt-5">
+                    {project.data.link && (
+                      <a
+                        href={project.data.link}
+                        target="_blank"
+                        rel="noopener"
+                        class="inline-flex min-h-11 items-center justify-center rounded-full border border-border/80 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                      >
+                        Visit live site
+                      </a>
+                    )}
+                    {project.data.github && (
+                      <a
+                        href={project.data.github}
+                        target="_blank"
+                        rel="noopener"
+                        class="inline-flex min-h-11 items-center justify-center rounded-full border border-border/80 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                      >
+                        Review source
+                      </a>
+                    )}
                   </div>
                 </div>
               </article>
             </FadeIn>
           )) : (
             <FadeIn client:visible>
-              <div class="rounded-[1.75rem] border border-dashed border-border/80 py-16 text-center">
-                <p class="text-muted-foreground">Independent work will appear here as supporting proof.</p>
+              <div class="rounded-[1.75rem] border border-dashed border-border/80 py-16 text-center md:col-span-2">
+                <p class="text-muted-foreground">Supporting projects will appear here as supporting proof.</p>
               </div>
             </FadeIn>
           )}

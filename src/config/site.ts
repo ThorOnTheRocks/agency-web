@@ -9,6 +9,11 @@ export const siteConfig = {
     github: 'https://github.com/gianlucagalota',
     linkedin: 'https://linkedin.com/in/gianlucagalota',
     twitter: 'https://twitter.com/gianlucagalota',
+    resume: '/assets/documents/gianluca-galota-cv.pdf',
+  },
+  assets: {
+    heroPortrait: '/assets/profile/portrait-working.jpg',
+    profilePortrait: '/assets/profile/portrait-standing.jpg',
   },
   author: {
     name: 'Gianluca Galota',

@@ -36,25 +36,39 @@ const authoritySignals = [
             </div>
           </div>
 
-          <div class="rounded-[1.75rem] border border-border/70 bg-surface/88 p-6 text-sm text-muted-foreground">
-            <p class="eyebrow">Working style</p>
-            <ul class="mt-4 space-y-3 leading-relaxed">
-              <li>Remote from Spain, collaborating internationally.</li>
-              <li>English, Spanish, Italian, and Portuguese.</li>
-              <li>Direct communication, focused scopes, visible progress.</li>
-              <li>Best with teams that want decisions made and shipped.</li>
-            </ul>
+          <div class="space-y-5">
+            <div class="overflow-hidden rounded-[2rem] border border-border/70 bg-surface/88">
+              <img
+                src={siteConfig.assets.profilePortrait}
+                alt="Gianluca Galota standing in front of a bookshelf"
+                class="aspect-[4/5] w-full object-cover object-center"
+                loading="eager"
+              />
+            </div>
 
-            <div class="mt-8 flex flex-wrap gap-4">
-              <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">
-                LinkedIn
-              </a>
-              <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">
-                GitHub
-              </a>
-              <a href={`mailto:${siteConfig.author.email}`} class="transition-colors hover:text-foreground">
-                Email
-              </a>
+            <div class="rounded-[1.75rem] border border-border/70 bg-surface/88 p-6 text-sm text-muted-foreground">
+              <p class="eyebrow">Working style</p>
+              <ul class="mt-4 space-y-3 leading-relaxed">
+                <li>Remote from Spain, collaborating internationally.</li>
+                <li>English, Spanish, Italian, and Portuguese.</li>
+                <li>Direct communication, focused scopes, visible progress.</li>
+                <li>Best with teams that want decisions made and shipped.</li>
+              </ul>
+
+              <div class="mt-8 flex flex-wrap gap-4">
+                <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">
+                  LinkedIn
+                </a>
+                <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">
+                  GitHub
+                </a>
+                <a href={`mailto:${siteConfig.author.email}`} class="transition-colors hover:text-foreground">
+                  Email
+                </a>
+                <a href={siteConfig.links.resume} download class="transition-colors hover:text-foreground">
+                  Download CV
+                </a>
+              </div>
             </div>
           </div>
         </div>

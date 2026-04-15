@@ -10,6 +10,7 @@ outcome: 'A stronger commercial story with better fit signalling, clearer author
 featured: true
 link: 'https://gianlucagalota.com'
 github: 'https://github.com/gianlucagalota/portfolio-redesign'
+heroImage: '/assets/profile/portrait-working.jpg'
 tags: ['positioning', 'editorial UI', 'conversion']
 publishedAt: 2024-03-15
 ---
