@@ -1,7 +1,8 @@
 ---
 title: 'Veekay Jewels'
 description: 'SEO-oriented WordPress landing page for a jewelry brand.'
-kind: 'independent'
+kind: 'client'
+visibility: 'supporting'
 client: 'Veekay Jewels'
 sector: 'Jewelry ecommerce'
 challenge: 'Present the brand with enough polish and clarity to support first impressions and search-driven discovery.'

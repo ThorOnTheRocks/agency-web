@@ -26,3 +26,18 @@ export async function getFeaturedProjects(): Promise<Project[]> {
   const projects = await getAllProjects();
   return projects.slice(0, 4);
 }
+
+export async function getFeaturedProofProjects(): Promise<Project[]> {
+  const projects = await getAllProjects();
+  return projects.filter((project) => project.data.kind === 'client' && project.data.featured);
+}
+
+export async function getSupportingProjects(): Promise<Project[]> {
+  const projects = await getAllProjects();
+  return projects.filter((project) => project.data.visibility === 'supporting');
+}
+
+export async function getArchivedProjects(): Promise<Project[]> {
+  const projects = await getAllProjects();
+  return projects.filter((project) => project.data.visibility === 'hidden');
+}

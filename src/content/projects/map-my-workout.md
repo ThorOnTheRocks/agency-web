@@ -2,6 +2,7 @@
 title: 'Map My Workout'
 description: 'Workout tracking application with map-based session logging.'
 kind: 'independent'
+visibility: 'hidden'
 client: 'Personal'
 sector: 'Fitness tracking app'
 challenge: 'Turn exercise logging into a lighter interaction by letting users pin and review workouts directly on a map.'

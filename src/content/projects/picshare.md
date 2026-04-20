@@ -2,6 +2,7 @@
 title: 'PicShare'
 description: 'Social photo sharing application with user interaction flows.'
 kind: 'independent'
+visibility: 'hidden'
 client: 'Personal'
 sector: 'Social web application'
 challenge: 'Explore a more complex product surface where users could publish content, react to each other, and move through an authenticated flow.'

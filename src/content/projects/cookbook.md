@@ -2,6 +2,7 @@
 title: 'CookBook'
 description: 'Recipe application for browsing and contributing dishes.'
 kind: 'independent'
+visibility: 'hidden'
 client: 'Personal'
 sector: 'Food discovery app'
 challenge: 'Make recipe discovery and user contribution feel approachable inside a small standalone product.'

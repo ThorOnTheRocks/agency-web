@@ -2,6 +2,7 @@
 title: 'MoviesDB'
 description: 'React application for browsing movie data through an external API.'
 kind: 'independent'
+visibility: 'hidden'
 client: 'Personal'
 sector: 'Entertainment browsing app'
 challenge: 'Create a responsive media browsing experience that could handle search, routing, and third-party API data cleanly.'
