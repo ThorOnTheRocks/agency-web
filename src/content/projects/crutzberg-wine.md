@@ -1,7 +1,8 @@
 ---
 title: 'Crutzberg Wine'
 description: 'Marketing site for a Belgian wine brand built in WordPress.'
-kind: 'independent'
+kind: 'client'
+visibility: 'supporting'
 client: 'Crutzberg'
 sector: 'Wine brand marketing'
 challenge: 'Create a cleaner brand presentation for a smaller wine business without overcomplicating the build.'

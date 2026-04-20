@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getPosts } from '../../services/content';
-import { NewsletterSection } from '../../components/react/Newsletter';
 import type { Post } from '../../services/content';
 
 export const prerender = true;
@@ -10,17 +9,17 @@ const posts: Post[] = await getPosts();
 ---
 
 <Layout
-  title="Writing"
-  description="Notes on product engineering, frontend systems, and delivery choices."
+  title="Notes"
+  description="Occasional notes on systems, delivery, and product decisions. Secondary to client work."
   fullBleed
 >
   <section class="border-b border-border/70">
     <div class="site-container py-14 md:py-20">
       <header>
-        <p class="eyebrow">Writing</p>
-        <h1 class="mt-4 section-title max-w-2xl">Secondary notes on systems, architecture, and delivery.</h1>
+        <p class="eyebrow">Notes</p>
+        <h1 class="mt-4 section-title max-w-2xl">Secondary writing on systems, delivery, and product choices.</h1>
         <p class="mt-5 max-w-2xl body-copy">
-          Writing stays here as supporting context for how I think, not as the main commercial path through the site.
+          These notes sit here as supporting context for how I think. They are not the main path through the site.
         </p>
       </header>
     </div>
@@ -32,10 +31,16 @@ const posts: Post[] = await getPosts();
         <article class="group relative flex flex-col space-y-2 py-8">
           <div class="mb-1 flex items-center gap-4 text-xs uppercase tracking-[0.18em] text-muted-foreground">
             <time datetime={post.data.publishedAt?.toISOString() || ''}>
-              {post.data.publishedAt ? new Date(post.data.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'No date'}
+              {post.data.publishedAt
+                ? new Date(post.data.publishedAt).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })
+                : 'No date'}
             </time>
             <span class="h-3 w-px bg-border"></span>
-            <span>Article</span>
+            <span>Note</span>
           </div>
 
           <h2 class="text-2xl font-semibold tracking-tight transition-colors group-hover:text-primary">
@@ -45,12 +50,10 @@ const posts: Post[] = await getPosts();
             </a>
           </h2>
 
-          <p class="text-muted-foreground leading-relaxed">
-            {post.data.description}
-          </p>
+          <p class="leading-relaxed text-muted-foreground">{post.data.description}</p>
 
           <div class="pt-2 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-            Read Article &rarr;
+            Read note &rarr;
           </div>
         </article>
       )) : (
@@ -60,8 +63,4 @@ const posts: Post[] = await getPosts();
       )}
     </div>
   </section>
-
-  <div class="pt-2">
-    <NewsletterSection client:visible />
-  </div>
 </Layout>

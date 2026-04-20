@@ -7,26 +7,25 @@ import { siteConfig } from '../config/site';
 export const prerender = true;
 
 const fitNotes = [
-  'Launches that need to feel credible before they are fully mature.',
-  'Redesigns where trust, clarity, or conversion have started to slip.',
-  'Rescue work where weak UX or brittle delivery is slowing the team down.',
+  'Launches that need to feel credible before the product is fully mature.',
+  'Redesigns where trust, clarity, or conversion have already started to slip.',
+  'Rescue work where weak UX or brittle delivery is putting pressure on an important release.',
 ];
 ---
 
-<Layout title="Contact" fullBleed>
+<Layout title="Start Project Brief" description="Start the project brief for launch, redesign, or rescue work." fullBleed>
   <section class="border-b border-border/70">
     <div class="site-container py-14 md:py-20">
       <FadeIn client:visible>
-        <div class="grid gap-12 lg:grid-cols-[340px_minmax(0,1fr)]">
+        <div class="grid gap-12 lg:grid-cols-[360px_minmax(0,1fr)]">
           <div>
-            <p class="eyebrow">Contact</p>
-            <h1 class="mt-4 section-title max-w-sm">Share the brief. I will reply with the right next step.</h1>
+            <p class="eyebrow">Project brief</p>
+            <h1 class="mt-4 section-title max-w-sm">Start the brief. I will reply with fit and the next step.</h1>
             <p class="mt-5 body-copy">
-              This form is designed to qualify serious project work rather than maximize submissions.
-              If the scope looks like a fit, I will come back with direction, availability, and how we should structure the conversation.
+              I work directly with a small number of clients at a time, so this form is designed to qualify serious scopes rather than maximize submissions.
             </p>
 
-            <div class="mt-8 rounded-[1.75rem] border border-border/70 bg-surface/88 p-6">
+            <div class="mt-8 rounded-[1.9rem] border border-border/70 bg-surface/88 p-6">
               <p class="eyebrow">Best fit</p>
               <ul class="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground md:text-base">
                 {fitNotes.map((note) => (
@@ -37,8 +36,8 @@ const fitNotes = [
 
             <div class="mt-8 space-y-4 border-t border-border/70 pt-6 text-sm text-muted-foreground">
               <div>
-                <p class="eyebrow">Response</p>
-                <p class="mt-2">Usually within 1-2 business days.</p>
+                <p class="eyebrow">How I reply</p>
+                <p class="mt-2">Usually within 1-2 business days, with fit, direction, and the right next step.</p>
               </div>
               <div>
                 <p class="eyebrow">Direct email</p>
@@ -47,15 +46,10 @@ const fitNotes = [
                 </a>
               </div>
               <div>
-                <p class="eyebrow">Links</p>
-                <div class="mt-2 flex flex-wrap gap-4">
-                  <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">
-                    LinkedIn
-                  </a>
-                  <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">
-                    GitHub
-                  </a>
-                </div>
+                <p class="eyebrow">Profile</p>
+                <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" class="mt-2 block transition-colors hover:text-foreground">
+                  LinkedIn
+                </a>
               </div>
               <p>Remote worldwide from Spain.</p>
             </div>

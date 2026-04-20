@@ -40,10 +40,10 @@ export const NewsletterSection = () => {
         <div className="max-w-4xl mx-auto text-center">
             <FadeIn>
                 <h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-foreground to-muted-foreground mb-6">
-                Stay ahead of the curve
+                Occasional notes, not a marketing funnel
                 </h2>
                 <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-                Join our exclusive newsletter to receive insights, agency offers, and the latest updates directly to your inbox. No spam, just value.
+                If I publish a new note or project update, it can land in your inbox. Low volume and no campaign sequence.
                 </p>
             </FadeIn>
 
@@ -103,7 +103,7 @@ export const NewsletterSection = () => {
                                 <span>Joining...</span>
                                 </span>
                             ) : (
-                                'Subscribe'
+                                'Join the list'
                             )}
                         </button>
                         </div>

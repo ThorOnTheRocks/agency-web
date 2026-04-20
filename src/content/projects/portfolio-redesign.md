@@ -2,6 +2,7 @@
 title: 'Portfolio Redesign'
 description: 'A commercial repositioning of my site to present launch, redesign, and rescue work as a premium solo specialist.'
 kind: 'independent'
+visibility: 'hidden'
 client: 'Gianluca Galota'
 sector: 'Personal brand'
 challenge: 'Shift the site from a polished developer portfolio into a sharper acquisition experience for premium clients.'

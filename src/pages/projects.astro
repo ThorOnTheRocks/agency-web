@@ -2,34 +2,42 @@
 import Layout from '../layouts/Layout.astro';
 import { FadeIn } from '../components/react/common/animations';
 import { ProjectImage } from '../components/react/common/ui';
-import { getAllProjects } from '../services/content';
-import { caseStudies } from '../data/homepage';
+import { getArchivedProjects, getFeaturedProofProjects, getSupportingProjects } from '../services/content';
+import { siteConfig } from '../config/site';
 import type { Project } from '../services/content';
 
 export const prerender = true;
 
-const projects: Project[] = await getAllProjects();
-const independentProjects = projects.filter((project) => project.data.kind !== 'client');
+const featuredProof: Project[] = await getFeaturedProofProjects();
+const supportingProjects: Project[] = await getSupportingProjects();
+const archivedProjects: Project[] = await getArchivedProjects();
 ---
 
 <Layout
   title="Selected Work"
-  description="Curated client proof and independent work across launches, redesigns, and rescue projects."
+  description="Direct client proof for launch, redesign, and rescue work, followed by a smaller supporting range."
   fullBleed
 >
   <section class="border-b border-border/70">
     <div class="site-container py-14 md:py-20">
       <FadeIn client:visible>
-        <header class="max-w-3xl">
-          <p class="eyebrow">Selected work</p>
-          <h1 class="mt-4 section-title">
-            Curated proof for buyers who need context, judgment, and outcomes.
-          </h1>
-          <p class="mt-5 max-w-2xl body-copy">
-            This page separates client evidence from independent exploration. The point is not to browse a portfolio.
-            It is to understand the kind of product problems I am trusted to solve and how I tend to approach them.
-          </p>
-        </header>
+        <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-end">
+          <header class="max-w-3xl">
+            <p class="eyebrow">Selected work</p>
+            <h1 class="mt-4 section-title">Proof first, archive second.</h1>
+            <p class="mt-5 max-w-2xl body-copy">
+              This page is designed to help a buyer assess fit quickly. The strongest direct client work comes first. Supporting range stays below it and no longer tries to behave like a broad developer portfolio.
+            </p>
+          </header>
+
+          <div class="border-l border-border/70 pl-5 text-sm leading-relaxed text-muted-foreground">
+            <p class="eyebrow">Primary path</p>
+            <p class="mt-3">Review the proof, then use the project brief if the scope feels aligned.</p>
+            <a href={siteConfig.cta.primary.href} class="mt-5 inline-flex text-sm font-medium text-foreground transition-colors hover:text-primary">
+              {siteConfig.cta.primary.label}
+            </a>
+          </div>
+        </div>
       </FadeIn>
     </div>
   </section>
@@ -38,59 +46,99 @@ const independentProjects = projects.filter((project) => project.data.kind !== '
     <div class="grid gap-12 lg:grid-cols-[260px_minmax(0,1fr)]">
       <FadeIn client:visible>
         <div class="lg:sticky lg:top-24">
-          <p class="eyebrow">Client proof</p>
-          <h2 class="mt-4 section-title max-w-sm">Selected engagements.</h2>
+          <p class="eyebrow">Direct client proof</p>
+          <h2 class="mt-4 section-title max-w-sm">The work I would want a serious buyer to read first.</h2>
           <p class="mt-5 max-w-sm body-copy">
-            Client work leads here because it is the clearest signal of how I handle commercial pressure,
-            technical constraint, and product quality at the same time.
+            These cases show the type of product surface I am usually brought in to handle: high-visibility launches, payment-sensitive flows, and operational platforms where mistakes are expensive.
           </p>
         </div>
       </FadeIn>
 
-      <div class="space-y-8">
-        {caseStudies.map((study, index) => (
+      <div class="space-y-10">
+        {featuredProof.map((project, index) => (
           <FadeIn client:visible delay={index * 0.08}>
-            <article class="group overflow-hidden rounded-[2rem] border border-border/70 bg-surface/88">
-              <div class="grid gap-0 lg:grid-cols-[minmax(0,1fr)_320px]">
-                <div class="p-7 md:p-9">
+            <article class="border-t border-border/70 pt-10 first:border-t-0 first:pt-0">
+              <div class="grid gap-8 lg:grid-cols-[minmax(0,1.12fr)_320px] lg:gap-12">
+                <div>
                   <div class="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                    <p class="eyebrow">{study.company}</p>
+                    <p class="eyebrow">{project.data.client}</p>
                     <span class="hidden h-1 w-1 rounded-full bg-border md:inline-flex"></span>
-                    <p>{study.sector}</p>
+                    <p>{project.data.sector}</p>
+                    {project.data.engagementType && (
+                      <>
+                        <span class="hidden h-1 w-1 rounded-full bg-border md:inline-flex"></span>
+                        <p>{project.data.engagementType}</p>
+                      </>
+                    )}
                   </div>
-                  <h3 class="mt-4 max-w-2xl font-display text-[2rem] leading-tight tracking-[-0.045em] text-foreground md:text-[2.45rem]">
-                    {study.title}
+
+                  <h3 class="mt-4 max-w-3xl font-display text-[2rem] leading-tight tracking-[-0.045em] text-foreground md:text-[2.9rem]">
+                    {project.data.title}
                   </h3>
+                  <p class="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                    {project.data.description}
+                  </p>
+
                   <div class="mt-8 grid gap-6 border-t border-border/70 pt-6 md:grid-cols-3">
                     <div>
                       <p class="eyebrow">Challenge</p>
                       <p class="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
-                        {study.challenge}
+                        {project.data.challenge}
                       </p>
                     </div>
                     <div>
                       <p class="eyebrow">Intervention</p>
                       <p class="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
-                        {study.intervention}
+                        {project.data.intervention}
                       </p>
                     </div>
                     <div>
                       <p class="eyebrow">Outcome</p>
                       <p class="mt-3 text-sm leading-relaxed text-foreground md:text-base">
-                        {study.outcome}
+                        {project.data.outcome}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div class="border-t border-border/70 p-6 lg:border-l lg:border-t-0">
-                  <ProjectImage
-                    alt={study.title}
-                    placeholderLabel={study.placeholderLabel}
-                    className="aspect-[4/5] rounded-[1.5rem]"
-                  />
-                  <p class="mt-4 text-sm leading-relaxed text-muted-foreground">{study.detail}</p>
-                </div>
+                <aside class="space-y-6 border-t border-border/70 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+                  <div class="grid gap-4 text-sm leading-relaxed text-muted-foreground">
+                    <div>
+                      <p class="eyebrow">Role</p>
+                      <p class="mt-2 text-foreground/86">{project.data.role}</p>
+                    </div>
+                    <div>
+                      <p class="eyebrow">Timeframe</p>
+                      <p class="mt-2 text-foreground/86">{project.data.timeframe}</p>
+                    </div>
+                    <div>
+                      <p class="eyebrow">Scope</p>
+                      <p class="mt-2 text-foreground/86">{project.data.scope}</p>
+                    </div>
+                  </div>
+
+                  {project.data.constraints?.length ? (
+                    <div>
+                      <p class="eyebrow">Constraints</p>
+                      <ul class="mt-3 space-y-3 text-sm leading-relaxed text-muted-foreground">
+                        {project.data.constraints.map((item) => (
+                          <li>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+
+                  {project.data.proofPoints?.length ? (
+                    <div class="border-t border-border/70 pt-5">
+                      <p class="eyebrow">Proof notes</p>
+                      <ul class="mt-3 space-y-3 text-sm leading-relaxed text-foreground/86">
+                        {project.data.proofPoints.map((item) => (
+                          <li>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                </aside>
               </div>
             </article>
           </FadeIn>
@@ -99,30 +147,29 @@ const independentProjects = projects.filter((project) => project.data.kind !== '
     </div>
   </section>
 
-  <section class="border-y border-border/70 bg-muted/30">
+  <section class="border-y border-border/70 bg-muted/25">
     <div class="site-container py-14 md:py-20">
       <div class="grid gap-12 lg:grid-cols-[260px_minmax(0,1fr)]">
         <FadeIn client:visible>
           <div>
-            <p class="eyebrow">Legacy portfolio</p>
-            <h2 class="mt-4 section-title max-w-sm">Earlier builds and supporting range.</h2>
+            <p class="eyebrow">Supporting range</p>
+            <h2 class="mt-4 section-title max-w-sm">Smaller commercial work that still supports the story.</h2>
             <p class="mt-5 max-w-sm body-copy">
-              These projects were migrated from the previous portfolio. They sit here as supporting evidence:
-              smaller launches, experiments, and earlier application work that still show execution range.
+              This range stays narrow on purpose. It adds breadth without reopening the generic portfolio framing that weakens premium positioning.
             </p>
           </div>
         </FadeIn>
 
         <div class="grid gap-6 md:grid-cols-2">
-          {independentProjects.length > 0 ? independentProjects.map((project, index) => (
+          {supportingProjects.length > 0 ? supportingProjects.map((project, index) => (
             <FadeIn client:visible delay={index * 0.08}>
-              <article class="group overflow-hidden rounded-[1.75rem] border border-border/70 bg-surface/88">
+              <article class="overflow-hidden rounded-[1.9rem] border border-border/70 bg-surface/88">
                 <div class="border-b border-border/70 bg-accent/20 p-4">
                   <ProjectImage
                     src={project.data.heroImage}
                     alt={project.data.title}
-                    placeholderLabel="Project visual pending"
-                    className="aspect-[16/10] rounded-[1.25rem]"
+                    placeholderLabel="Supporting project"
+                    className="aspect-[16/10] rounded-[1.3rem]"
                   />
                 </div>
 
@@ -135,24 +182,101 @@ const independentProjects = projects.filter((project) => project.data.kind !== '
                     <p>{project.data.sector || 'Supporting project'}</p>
                   </div>
 
-                  <h3 class="mt-4 font-display text-[1.85rem] leading-tight tracking-[-0.045em] text-foreground">
+                  <h3 class="mt-4 font-display text-[1.9rem] leading-tight tracking-[-0.045em] text-foreground">
                     {project.data.title}
                   </h3>
                   <p class="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
                     {project.data.description}
                   </p>
 
-                  {project.data.tags?.length ? (
-                    <div class="mt-5 flex flex-wrap gap-2">
-                      {project.data.tags.map((tag) => (
-                        <span class="rounded-full border border-border/70 px-3 py-1 text-[0.72rem] uppercase tracking-[0.18em] text-muted-foreground">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  ) : null}
+                  <div class="mt-6 border-t border-border/70 pt-5">
+                    <p class="text-sm leading-relaxed text-foreground/86">{project.data.outcome}</p>
+                  </div>
 
-                  <div class="mt-6 flex flex-wrap gap-3 border-t border-border/70 pt-5">
+                  {project.data.link && (
+                    <div class="mt-6">
+                      <a
+                        href={project.data.link}
+                        target="_blank"
+                        rel="noopener"
+                        class="inline-flex min-h-11 items-center justify-center rounded-full border border-border/80 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                      >
+                        Visit live site
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </article>
+            </FadeIn>
+          )) : (
+            <FadeIn client:visible>
+              <div class="rounded-[1.75rem] border border-dashed border-border/80 py-16 text-center md:col-span-2">
+                <p class="text-muted-foreground">Supporting projects will appear here as additional commercial proof.</p>
+              </div>
+            </FadeIn>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="site-container py-14 md:py-20">
+    <div class="grid gap-12 lg:grid-cols-[260px_minmax(0,1fr)]">
+      <FadeIn client:visible>
+        <div>
+          <p class="eyebrow">Portfolio archive</p>
+          <h2 class="mt-4 section-title max-w-sm">The rest of the secondary work stays here.</h2>
+          <p class="mt-5 max-w-sm body-copy">
+            These projects are lower priority in the buyer journey, but they still belong in the portfolio as supporting range, experiments, and self-directed builds.
+          </p>
+        </div>
+      </FadeIn>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        {archivedProjects.length > 0 ? archivedProjects.map((project, index) => (
+          <FadeIn client:visible delay={index * 0.05}>
+            <article class="overflow-hidden rounded-[1.75rem] border border-border/70 bg-surface/88">
+              <div class="border-b border-border/70 bg-accent/20 p-4">
+                <ProjectImage
+                  src={project.data.heroImage}
+                  alt={project.data.title}
+                  placeholderLabel="Archive project"
+                  className="aspect-[16/10] rounded-[1.2rem]"
+                />
+              </div>
+
+              <div class="p-6">
+                <div class="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                  {project.data.client && <p>{project.data.client}</p>}
+                  {project.data.client && project.data.sector && (
+                    <span class="hidden h-1 w-1 rounded-full bg-border sm:inline-flex"></span>
+                  )}
+                  <p>{project.data.sector || 'Archive project'}</p>
+                </div>
+
+                <h3 class="mt-4 font-display text-[1.8rem] leading-tight tracking-[-0.045em] text-foreground">
+                  {project.data.title}
+                </h3>
+                <p class="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
+                  {project.data.description}
+                </p>
+
+                {project.data.tags?.length ? (
+                  <div class="mt-5 flex flex-wrap gap-2">
+                    {project.data.tags.map((tag) => (
+                      <span class="rounded-full border border-border/70 px-3 py-1 text-[0.72rem] uppercase tracking-[0.18em] text-muted-foreground">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
+
+                <div class="mt-6 border-t border-border/70 pt-5">
+                  <p class="text-sm leading-relaxed text-foreground/86">{project.data.outcome}</p>
+                </div>
+
+                {(project.data.link || project.data.github) && (
+                  <div class="mt-6 flex flex-wrap gap-3">
                     {project.data.link && (
                       <a
                         href={project.data.link}
@@ -174,17 +298,17 @@ const independentProjects = projects.filter((project) => project.data.kind !== '
                       </a>
                     )}
                   </div>
-                </div>
-              </article>
-            </FadeIn>
-          )) : (
-            <FadeIn client:visible>
-              <div class="rounded-[1.75rem] border border-dashed border-border/80 py-16 text-center md:col-span-2">
-                <p class="text-muted-foreground">Supporting projects will appear here as supporting proof.</p>
+                )}
               </div>
-            </FadeIn>
-          )}
-        </div>
+            </article>
+          </FadeIn>
+        )) : (
+          <FadeIn client:visible>
+            <div class="rounded-[1.75rem] border border-dashed border-border/80 py-16 text-center md:col-span-2">
+              <p class="text-muted-foreground">Archive projects will appear here when added.</p>
+            </div>
+          </FadeIn>
+        )}
       </div>
     </div>
   </section>

@@ -2,42 +2,53 @@
 import Layout from '../layouts/Layout.astro';
 import { FadeIn } from '../components/react/common/animations';
 import { siteConfig } from '../config/site';
-import { authorityPillars, fitStatements } from '../data/homepage';
+import { bestFitStatements, notFitStatements, trustStatements, workingModel } from '../data/homepage';
 
 export const prerender = true;
 
-const authoritySignals = [
-  'Enterprise logistics and payment-sensitive surfaces where reliability matters.',
-  'Luxury commerce work where performance and presentation both shape trust.',
-  'Independent product scopes where senior judgment has to carry from UI to deployment.',
+const profileFacts = [
+  'Remote from Spain, collaborating internationally.',
+  'English, Spanish, Italian, and Portuguese.',
+  'Focused on a small number of direct engagements at a time.',
 ];
 ---
 
-<Layout title="Profile" fullBleed>
+<Layout title="Profile" description={siteConfig.positioning.soloModel} fullBleed>
   <section class="border-b border-border/70">
     <div class="site-container py-14 md:py-20">
       <FadeIn client:visible>
-        <div class="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_320px] lg:items-end">
+        <div class="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_360px] lg:items-end">
           <div>
             <p class="eyebrow">Profile</p>
-            <h1 class="mt-4 section-title max-w-3xl">
-              Senior product judgment for teams that need confidence quickly.
-            </h1>
+            <h1 class="mt-4 section-title max-w-3xl">A solo operating model built for product-critical work.</h1>
             <div class="mt-6 max-w-2xl space-y-4 body-copy">
               <p>
-                I work across interface quality, frontend architecture, and delivery-critical product work.
-                The value is not only in implementation. It is in making the product feel more credible,
-                clarifying the decision that matters, and shipping it without unnecessary layers.
+                I do not run an agency and I do not present a studio structure. Clients hire me directly when they need one senior operator to carry product judgment and implementation in the same engagement.
               </p>
               <p>
-                My background spans enterprise platforms, payment-sensitive flows, and luxury commerce.
-                That mix tends to be useful when a team needs both technical range and a sharper bar for what the product should feel like.
+                The work usually sits where interface trust, technical quality, and release confidence all affect the business outcome. That is why the model stays narrow: fewer layers, focused scopes, and direct accountability for the surface that matters.
               </p>
+              <p>{siteConfig.positioning.proofLine}</p>
+            </div>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a
+                href={siteConfig.cta.primary.href}
+                class="inline-flex min-h-11 items-center justify-center rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+              >
+                {siteConfig.cta.primary.label}
+              </a>
+              <a
+                href={siteConfig.cta.secondary.href}
+                class="inline-flex min-h-11 items-center justify-center rounded-full border border-border/80 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+              >
+                {siteConfig.cta.secondary.label}
+              </a>
             </div>
           </div>
 
           <div class="space-y-5">
-            <div class="overflow-hidden rounded-[2rem] border border-border/70 bg-surface/88">
+            <div class="overflow-hidden rounded-[2.4rem] border border-border/70 bg-surface/88">
               <img
                 src={siteConfig.assets.profilePortrait}
                 alt="Gianluca Galota standing in front of a bookshelf"
@@ -46,28 +57,12 @@ const authoritySignals = [
               />
             </div>
 
-            <div class="rounded-[1.75rem] border border-border/70 bg-surface/88 p-6 text-sm text-muted-foreground">
-              <p class="eyebrow">Working style</p>
-              <ul class="mt-4 space-y-3 leading-relaxed">
-                <li>Remote from Spain, collaborating internationally.</li>
-                <li>English, Spanish, Italian, and Portuguese.</li>
-                <li>Direct communication, focused scopes, visible progress.</li>
-                <li>Best with teams that want decisions made and shipped.</li>
-              </ul>
-
-              <div class="mt-8 flex flex-wrap gap-4">
-                <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">
-                  LinkedIn
-                </a>
-                <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground">
-                  GitHub
-                </a>
-                <a href={`mailto:${siteConfig.author.email}`} class="transition-colors hover:text-foreground">
-                  Email
-                </a>
-                <a href={siteConfig.links.resume} download class="transition-colors hover:text-foreground">
-                  Download CV
-                </a>
+            <div class="border-l border-border/70 pl-5 text-sm leading-relaxed text-muted-foreground">
+              <p class="eyebrow">Working facts</p>
+              <div class="mt-4 space-y-3">
+                {profileFacts.map((item) => (
+                  <p>{item}</p>
+                ))}
               </div>
             </div>
           </div>
@@ -80,17 +75,17 @@ const authoritySignals = [
     <div class="grid gap-12 lg:grid-cols-[280px_minmax(0,1fr)]">
       <FadeIn client:visible>
         <div>
-          <p class="eyebrow">Why clients hire me</p>
-          <h2 class="mt-4 section-title max-w-sm">The useful part is judgment as much as craft.</h2>
+          <p class="eyebrow">How it works</p>
+          <h2 class="mt-4 section-title max-w-sm">Why teams bring me in directly.</h2>
         </div>
       </FadeIn>
 
-      <div class="grid gap-6 md:grid-cols-3">
-        {authorityPillars.map((item, index) => (
+      <div class="divide-y divide-border/70 border-y border-border/70">
+        {workingModel.map((item, index) => (
           <FadeIn client:visible delay={index * 0.08}>
-            <article class="rounded-[1.5rem] border border-border/70 bg-surface/88 p-6">
-              <p class="eyebrow">{item.title}</p>
-              <p class="mt-4 text-base leading-relaxed text-muted-foreground">{item.description}</p>
+            <article class="grid gap-4 py-6 md:grid-cols-[260px_minmax(0,1fr)]">
+              <p class="font-display text-2xl leading-tight tracking-[-0.04em] text-foreground">{item.title}</p>
+              <p class="text-base leading-relaxed text-muted-foreground">{item.description}</p>
             </article>
           </FadeIn>
         ))}
@@ -98,18 +93,18 @@ const authoritySignals = [
     </div>
   </section>
 
-  <section class="border-y border-border/70 bg-muted/30">
+  <section class="border-y border-border/70 bg-muted/25">
     <div class="site-container py-14 md:py-20">
       <div class="grid gap-12 lg:grid-cols-[280px_minmax(0,1fr)]">
         <FadeIn client:visible>
           <div>
-            <p class="eyebrow">Authority signals</p>
-            <h2 class="mt-4 section-title max-w-sm">Experience that supports high-trust product work.</h2>
+            <p class="eyebrow">Trust material</p>
+            <h2 class="mt-4 section-title max-w-sm">The part that should make the buyer feel safer.</h2>
           </div>
         </FadeIn>
 
         <div class="divide-y divide-border/70 border-y border-border/70">
-          {authoritySignals.map((item, index) => (
+          {trustStatements.map((item, index) => (
             <FadeIn client:visible delay={index * 0.08}>
               <article class="py-6">
                 <p class="max-w-3xl text-base leading-relaxed text-foreground/86 md:text-lg">{item}</p>
@@ -122,23 +117,71 @@ const authoritySignals = [
   </section>
 
   <section class="site-container py-14 md:py-20">
-    <div class="grid gap-12 lg:grid-cols-[280px_minmax(0,1fr)]">
+    <div class="grid gap-10 lg:grid-cols-2">
       <FadeIn client:visible>
         <div>
           <p class="eyebrow">Best fit</p>
-          <h2 class="mt-4 section-title max-w-sm">The kind of work where this model is most useful.</h2>
+          <h2 class="mt-4 section-title max-w-xl">This model works best when the problem is already real.</h2>
+          <div class="mt-8 space-y-4">
+            {bestFitStatements.map((item, index) => (
+              <FadeIn client:visible delay={index * 0.08}>
+                <article class="border-t border-border/70 pt-4 first:border-t-0 first:pt-0">
+                  <p class="text-base leading-relaxed text-foreground/86">{item}</p>
+                </article>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </FadeIn>
 
-      <div class="grid gap-5">
-        {fitStatements.map((item, index) => (
-          <FadeIn client:visible delay={index * 0.08}>
-            <article class="rounded-[1.4rem] border border-border/70 bg-surface/88 px-6 py-5">
-              <p class="text-base leading-relaxed text-foreground/86">{item}</p>
-            </article>
-          </FadeIn>
-        ))}
-      </div>
+      <FadeIn client:visible delay={0.12}>
+        <div>
+          <p class="eyebrow">Not fit</p>
+          <h2 class="mt-4 section-title max-w-xl">Where a different model is probably the better choice.</h2>
+          <div class="mt-8 space-y-4">
+            {notFitStatements.map((item, index) => (
+              <FadeIn client:visible delay={index * 0.08}>
+                <article class="border-t border-border/70 pt-4 first:border-t-0 first:pt-0">
+                  <p class="text-base leading-relaxed text-muted-foreground">{item}</p>
+                </article>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="border-t border-border/70">
+    <div class="site-container py-14 md:py-20">
+      <FadeIn client:visible>
+        <div class="grid gap-8 rounded-[2.4rem] border border-border/70 bg-surface/92 p-8 md:p-10 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-end">
+          <div>
+            <p class="eyebrow">Project brief</p>
+            <h2 class="mt-4 font-display text-[2.5rem] leading-[0.98] tracking-[-0.05em] text-foreground md:text-[3.8rem]">
+              If the scope is live and the product surface matters, send the brief.
+            </h2>
+            <p class="mt-5 max-w-2xl body-copy">
+              Include the product, the constraint, the timeline, and what has to improve. I will reply with fit, direction, and the next step.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <a
+              href={siteConfig.cta.primary.href}
+              class="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              {siteConfig.cta.primary.label}
+            </a>
+            <a
+              href={`mailto:${siteConfig.author.email}`}
+              class="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-border/80 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            >
+              Email directly
+            </a>
+          </div>
+        </div>
+      </FadeIn>
     </div>
   </section>
 </Layout>
